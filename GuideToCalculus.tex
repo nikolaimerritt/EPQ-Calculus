@@ -7,6 +7,7 @@
 \numberwithin{equation}{section}
 
 \begin{document}
+\newcommand{\D}[2]{\frac{\textrm{d}#1}{\textrm{d}#2}}
 \maketitle
 
 \newpage
@@ -163,6 +164,19 @@ We can now notice how the derivative always is the original function multiplied 
 \frac{\textrm{d}(x^n)}{\textrm{d}x} & \ \equiv \ nx^{n-1} \ \textrm{ for any real } n.
 \end{align*}
 This pattern can be proved fairly easily for any natural power \(n\) using the binomial theorem, and is left as an exercise to the reader. Unfortunately, actually proving this pattern (known as the ``power rule") for any real power \(n\) will only be possible later on in this book.
+\\ \\ Finally, what if we want to sum two functions together? Say if we had \(y = x^4 + x^3 \), for example. Well, using our definition of a limit to find a general solution. For any two functions \(f(x)\) and \(g(x)\), 
+\begin{align*}
+	\frac{\textrm{d}\left[ f(x) + g(x) \right]}{\textrm{d}x} &= \lim_{\Delta x \to 0} \frac{f(x + \Delta x) - f(x) \ + \  g(x + \Delta x) - g(x)}{\Delta x} \\ \\
+	&= \lim_{\Delta x \to 0} \left[ \frac{f(x + \Delta x) - f(x)}{\Delta x} + \frac{g(x + \Delta x) - g(x)}{\Delta x} \right] \\ \\
+	&= \lim_{\Delta x \to 0} \left[ \frac{f(x + \Delta x) - f(x)}{\Delta x} \right] + \lim_{\Delta x \to 0} \left[ \frac{g(x + \Delta x) - g(x)}{\Delta x} \right] \\ \\
+	&= \frac{\textrm{d}[f(x)]}{\textrm{d}x} + \frac{\textrm{d}[g(x)]}{\textrm{d}x} \ \textrm{or, as most mathematicians write, } \frac{\textrm{d}f}{\textrm{d}x} + \D{g}{x} \\ \\
+	\textrm{Thus, } \ \D{y}{x} &= \D{(x^4)}{x} + \D{(x^3)}{x} \\ \\ &= 4x^3 + 3x^2.
+\end{align*}
+\\ Given this, it is trivial to prove that 
+\begin{align*}
+	\D{\, [k \times f(x)]}{x} & \equiv k \times \D{f}{x}
+\end{align*}
+for any number \(k\), and is also left as an exercise.
 \\ \\ This brings us to a close on the fundamental idea of the derivative and the differential. As with last section, I would highly recommend solving practice problems on the derivative power rule until you are completely familiar with these ideas, before moving on to our next topic.
 \end{document}
 
