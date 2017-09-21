@@ -188,7 +188,14 @@ Previously, we established how to find the rate of change of any polynomial equa
 \begin{align*}
 	v(t) &= 12 \, t.
 \end{align*} 
-Could they then work backwards to find an equation for the criminal's distance?
+Could they then work backwards to find an equation for the criminal's distance? 
+\\ \\ To do this, let's start by giving a name to the criminal's displacement. Since referring to it as \(d(t)\) could lead to confusion with \(\textrm{d}(t)\) -- a completely different concept -- we'll resort to the formal physics notation: \(s(t)\). So, we have 
+\begin{align*}
+v(t) &= \D{s}{t} \, .
+\end{align*}
+How do we then get to \(
+
+\iffalse
 \\ \\ It'd be simplest if we first looked at how to work out a solution for this, then what's actually going on behind it.
 \begin{align*}
 \textrm{Let } s(t) &= kt^n \ \textrm{, and } v(t) = at^p \\ \\
@@ -208,10 +215,12 @@ at^p &= 12 \, t \\ \\
 \therefore{} \ s(t) &= \frac{12 t^2}{2} \\ \\
 &= 6t^2
 \end{align*}
-And to check our anwer:
+And to check our answer:
 \begin{align*}
 \D{(6t^2)}{t} &= 12t 
 \end{align*}
 as required.
+\\ \\ Now for the hard question: what did we just do here? If we perform this process on a function, what exactly \textit{is} our answer? We can explain quite happily what a derivative is in terms of a function, but what about our ``anti-derivative" here? 
+\fi
 \end{document}
 
