@@ -7,7 +7,11 @@
 \numberwithin{equation}{section}
 
 \begin{document}
+\newcommand{\D}[2]{\frac{\textrm{d}#1}{\textrm{d}#2}}
 \maketitle
+
+\newpage
+\tableofcontents
 
 \newpage
 \section{Know your Limits}
@@ -162,16 +166,52 @@ We can now notice how the derivative always is the original function multiplied 
 \begin{align*}
 \frac{\textrm{d}(x^n)}{\textrm{d}x} & \ \equiv \ nx^{n-1} \ \textrm{ for any real } n.
 \end{align*}
-This pattern can be proved fairly easily for any positive integer \(n\) using the binomial theorem, and is left as an exercise to the reader. Unfortunately, actually proving this pattern (known as the ``power rule") for any real exponent \(n\) will only be possible later on in this book.
-\\ \\ This brings us to a close on the fundamental idea of the derivative and the differential. As with last section, I would highly recommend solving practice problems on the derivative power rule until you are completely familiar with these ideas, before moving on to our next topic.
+This pattern can be proved fairly easily for any natural power \(n\) using the binomial theorem, and is left as an exercise to the reader. Unfortunately, actually proving this pattern (known as the ``power rule") for any real power \(n\) will only be possible later on in this book.
+\\ \\ Finally, what if we want to sum two functions together? Say if we had \(y = x^4 + x^3 \), for example. Well, using our definition of a limit to find a general solution. For any two functions \(f(x)\) and \(g(x)\), 
+\begin{align*}
+	\frac{\textrm{d}\left[ f(x) + g(x) \right]}{\textrm{d}x} &= \lim_{\Delta x \to 0} \frac{f(x + \Delta x) - f(x) \ + \  g(x + \Delta x) - g(x)}{\Delta x} \\ \\
+	&= \lim_{\Delta x \to 0} \left[ \frac{f(x + \Delta x) - f(x)}{\Delta x} + \frac{g(x + \Delta x) - g(x)}{\Delta x} \right] \\ \\
+	&= \lim_{\Delta x \to 0} \left[ \frac{f(x + \Delta x) - f(x)}{\Delta x} \right] + \lim_{\Delta x \to 0} \left[ \frac{g(x + \Delta x) - g(x)}{\Delta x} \right] \\ \\
+	&= \frac{\textrm{d}[f(x)]}{\textrm{d}x} + \frac{\textrm{d}[g(x)]}{\textrm{d}x} \ \textrm{or, as most mathematicians write, } \frac{\textrm{d}f}{\textrm{d}x} + \D{g}{x} \\ \\
+	\textrm{Thus, } \ \D{y}{x} &= \D{(x^4)}{x} + \D{(x^3)}{x} \\ \\ &= 4x^3 + 3x^2.
+\end{align*}
+\\ Given this, it is trivial to prove that 
+\begin{align*}
+	\D{\, [k \times f(x)]}{x} & \equiv k \times \D{f}{x}
+\end{align*}
+for any constant \(k\), and is also left as an exercise.
+\\ \\ This brings us to a close on the fundamental idea of the derivative and the differential. As with last section, I would highly recommend solving practice problems on these derivative properties until you are completely familiar with them, before moving on to our next topic.
+
 \newpage
-\begin{align}
-\frac{sinx}{1-sinx} + \frac{sinx}{1+sinx} &\equiv \frac{sinx \ (1 + sinx) - sinx \ (1 - sinx)}{(1 - sinx) \ (1 + sinx)} \\ \nonumber \\
-& \equiv \frac{sinx + sin^2x - sinx + sin^2x}{1 - sin^2x} \\ \nonumber \\
-& \equiv \frac{2 \ sin^2x}{cos^2x} \\ \nonumber \\
-& \equiv 2 \ \frac{sin^2x}{cos^2x} \\ \nonumber \\
-& \equiv tan^2x \ \forall x \\ \\
-x^{- \frac{1}{2}} \left(5x^2 - x^{\frac{3}{2}} \right)
-\end{align}
+\section{The Integral: an integral part of Calculus}
+Previously, we established how to find the rate of change of any polynomial equation. But what if we were given the rate of change, and wanted to get back to the original? For instance, imagine that the police caught someone speeding, and from their analysis, they worked out their velocity, \(v\) at any point in time along their journey as
+\begin{align*}
+	v(t) &= 12 \, t.
+\end{align*} 
+Could they then work backwards to find an equation for the criminal's distance?
+\\ \\ It'd be simplest if we first looked at how to work out a solution for this, then what's actually going on behind it.
+\begin{align*}
+\textrm{Let } s(t) &= kt^n \ \textrm{, and } v(t) = at^p \\ \\
+\textrm{Now, we have that } v(t) &= \D{s}{t} \\ \\ 
+\Rightarrow at^p &= nkt^{n-1} \\ \\
+\Rightarrow a &= nk \ \textrm{, and } p = n - 1 \\ \\
+\textrm{Since we're going from } & v(t) \textrm{ to } s(t) \textrm{, we want to express } n \textrm{ and } k \textrm{ in terms of } a \textrm{ and } p \\ \\
+\textrm{So, we have } n &= p + 1 \\ \\
+\textrm{And, } k &= \frac{a}{n} \\ \\
+&= \frac{a}{p + 1} \\ \\
+\therefore{} \ kt^n &= \frac{a \, t^{\, p+1}}{p + 1} 
+\end{align*}
+In other words, to get to the original function, you increase the derivative's power then divide by that power. Applying this to our scenario, we have
+\begin{align*}
+at^p &= 12 \, t \\ \\
+\Rightarrow a &= 12, \ \textrm{and } t = 1 \\ \\
+\therefore{} \ s(t) &= \frac{12 t^2}{2} \\ \\
+&= 6t^2
+\end{align*}
+And to check our anwer:
+\begin{align*}
+\D{(6t^2)}{t} &= 12t 
+\end{align*}
+as required.
 \end{document}
 

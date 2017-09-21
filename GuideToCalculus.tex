@@ -189,5 +189,30 @@ Previously, we established how to find the rate of change of any polynomial equa
 	v(t) &= 12 \, t.
 \end{align*} 
 Could they then work backwards to find an equation for the criminal's distance?
+\\ \\ It'd be simplest if we first looked at how to work out a solution for this, then what's actually going on behind it.
+\begin{align*}
+\textrm{Let } s(t) &= kt^n \ \textrm{, and } v(t) = at^p \\ \\
+\textrm{Now, we have that } v(t) &= \D{s}{t} \\ \\ 
+\Rightarrow at^p &= nkt^{n-1} \\ \\
+\Rightarrow a &= nk \ \textrm{, and } p = n - 1 \\ \\
+\textrm{Since we're going from } & v(t) \textrm{ to } s(t) \textrm{, we want to express } n \textrm{ and } k \textrm{ in terms of } a \textrm{ and } p \\ \\
+\textrm{So, we have } n &= p + 1 \\ \\
+\textrm{And, } k &= \frac{a}{n} \\ \\
+&= \frac{a}{p + 1} \\ \\
+\therefore{} \ kt^n &= \frac{a \, t^{\, p+1}}{p + 1} 
+\end{align*}
+In other words, to get to the original function, you increase the derivative's power then divide by that power. Applying this to our scenario, we have
+\begin{align*}
+at^p &= 12 \, t \\ \\
+\Rightarrow a &= 12, \ \textrm{and } t = 1 \\ \\
+\therefore{} \ s(t) &= \frac{12 t^2}{2} \\ \\
+&= 6t^2
+\end{align*}
+And to check our answer:
+\begin{align*}
+\D{(6t^2)}{t} &= 12t 
+\end{align*}
+as required.
+\\ \\ Now for the hard question: what did we just do here? If we perform this process on a function, what exactly \textit{is} our answer? We can explain quite happily what a derivative is in terms of a function, but what about our ``anti-derivative" here?
 \end{document}
 
