@@ -1,13 +1,14 @@
 \documentclass[11pt]{article}
 \usepackage[margin=0.5in]{geometry}
 \usepackage{amsfonts,amsmath,amssymb,amsthm}
+\usepackage{ragged2e}
 \author{Nikolai Merritt}
 \title{Understanding Calculus for Beginners}
 \date{\vspace{-5ex}}
 \numberwithin{equation}{section}
 
 \begin{document}
-\newcommand{\D}[2]{\frac{\textrm{d}#1}{\textrm{d}#2}}
+\newcommand{\D}[2]{\frac{\text{d}#1}{\text{d}#2}}
 \maketitle
 
 \newpage
@@ -21,50 +22,50 @@ Now, even though you never actually saw what happened in those last few seconds 
 \\ \\
 This very intuitive way of thinking can be applied not only to everyday life, but to great effect in mathematics too. Imagine that Jim is in charge of monitoring the daily water level at the river Thames, and it so happens that the rise of millimetres of water height, in terms of times passed in hours, is
 \begin{align*}
-\textrm{rise in water level} &= \frac{(t + 5) \ (t - 12)}{t - 12}.
+\text{rise in water level} &= \frac{(t + 5) \ (t - 12)}{t - 12}.
 \end{align*}
 \\ \\
 If Jim called us 8 hours in and asked us how what the rise in water level was, we could simply put 8 into our formula to get:
 \begin{align*}
-\textrm{rise in water level} &= \frac{(8 + 5) \ (8 - 12)}{8 - 12} = \frac{13 \times -4}{-4} = 13 \ \textrm{mm.}
+\text{rise in water level} &= \frac{(8 + 5) \ (8 - 12)}{8 - 12} = \frac{13 \times -4}{-4} = 13 \ \text{mm.}
 \end{align*}
 \\ \\ 
 But here's the problem: what if Jim then wanted us to check the rise 12 hours in? Simply putting 12 into our formula would give us:
 \begin{align*}
-\textrm{rise in water level} = \frac{(12 + 5) \ (12 - 12)}{12 - 12} = \frac{17 \times 0}{0}.
+\text{rise in water level} = \frac{(12 + 5) \ (12 - 12)}{12 - 12} = \frac{17 \times 0}{0}.
 \end{align*}
 And we don't know the answer to this question. No one knows what anything divided by zero is. 
 \\ \\
 However, we can still offer Jim an incredibly good estimate to how much the Thames' water level has risen. Like in our earlier basketball scenario, we can look at what happens when the time passed gets closer and closer to 12 and make a guess from that. \(t = 11.5\) seems to be as good a start as any:
 \begin{align*}
-\textrm{rise in water level} = \frac{(11.5 + 5) \ (11.5 - 12)}{11.5 - 12} = \frac{16.5 \times -0.5}{-0.5} = 16.5 \, \textrm{mm.}
+\text{rise in water level} = \frac{(11.5 + 5) \ (11.5 - 12)}{11.5 - 12} = \frac{16.5 \times -0.5}{-0.5} = 16.5 \, \text{mm.}
 \end{align*}
 \\ Now let's get closer. \(t = 11.9\) will give us a more accurate guess:
 \begin{align*}
-\textrm{rise in water level} = \frac{(11.9 + 5) \ (11.9 - 12)}{11.9 - 12} = \frac{16.9 \times -0.1}{-0.1} = 16.9 \, \textrm{mm.}
+\text{rise in water level} = \frac{(11.9 + 5) \ (11.9 - 12)}{11.9 - 12} = \frac{16.9 \times -0.1}{-0.1} = 16.9 \, \text{mm.}
 \end{align*}
 \\ And if we wanted to get even more accurate still, when \(t = 11.999\):
 \begin{align*}
-\textrm{rise in water level} = \frac{(11.999 + 5) \ (11.999 - 12)}{11.999 - 12} = \frac{16.999 \times -0.0001}{-0.0001} = 16.999 \ \textrm{mm.}
+\text{rise in water level} = \frac{(11.999 + 5) \ (11.999 - 12)}{11.999 - 12} = \frac{16.999 \times -0.0001}{-0.0001} = 16.999 \ \text{mm.}
 \end{align*}
 \\ Just to be sure, let's check the water level rise immediately after 12 minutes. If everything goes well, this should give us an answer very close to 17 too:
 \begin{align*}
-\textrm{rise in water level} = \frac{(12.0001 + 5) \ (12.0001 - 12)}{12.0001 - 12} = \frac{17.0001 \times 0.0001}{0.0001} = 17.0001 \, \textrm{mm.}
+\text{rise in water level} = \frac{(12.0001 + 5) \ (12.0001 - 12)}{12.0001 - 12} = \frac{17.0001 \times 0.0001}{0.0001} = 17.0001 \, \text{mm.}
 \end{align*}
 \\ So we can safely say that, as the time passed gets closer and closer to 12 minutes, the Thames' water level has risen by 17 mm. In other words, the approaching value of the water level rise is 17, as \(t\) approaches 12. Mathematicians have named approaching values like these with the word ``limit", saying that the limit of the rise is 17, as \(t\) goes to 12.
 \\ Because the idea of finding a limit is such a useful tool, mathematicians have also invented their own notation for it. Instead of writing the previous sentence, they would write:
 \begin{align*}
-\lim_{t \to 12} \left(\textrm{rise in water level}\right) = 17 \ \ \ \textrm{or,} \ \ \ \lim_{t \to 12} \frac{(t + 5) \ (t - 12)}{t - 12} = 17.
+\lim_{t \to 12} \left(\text{rise in water level}\right) = 17 \ \ \ \text{or,} \ \ \ \lim_{t \to 12} \frac{(t + 5) \ (t - 12)}{t - 12} = 17.
 \end{align*}
 \\ Now that we've got the jargon out the way, you may be wondering how can we be so sure our limit is 17 \textit{exactly}? What if our rise actually approaches, say, 16.9998, 17.0002, or 17 \(\frac{2}{8653}\)? While our answer of ``some number pretty darn close to 17" should do just fine for this simple scenario, knowing if some function limits to, say, \(\pi\), with all its uses and shortcuts, instead of 3.1416, can be crucial for more important ones. This is why most limits are solved algebraically, instead of plugging in numbers and watching what happens. Which allows for far more precision and rigour.  
 \\ \\ Thankfully, just like how fundamentally simple the idea of a limit is, so are the ways in which it can be used. Unlike a concrete function like sin \(x\), a limit is more like a concept, and so is a bit more malleable. This allows us to fiddle around with functions we want to find a limit for, until they're easy enough to solve intuitively. For example, the limit of two functions added together is the same as the sum of the individual limits of those two functions. Or, more mathematically written,
 \begin{align*}
-\lim_{x \to c} \left[ \, f(x) + g(x) \, \right] \ &\equiv \ \lim_{x \to c} f(x) + \lim_{x \to c} g(x) \ \textrm{ for any value } c.
+\lim_{x \to c} \left[ \, f(x) + g(x) \, \right] \ &\equiv \ \lim_{x \to c} f(x) + \lim_{x \to c} g(x) \ \text{ for any value } c.
 \end{align*}
 \\ And that makes intuitive sense if you think about it: the combined value two functions approach is going to be the same whether you combine them at the start or at the end.
 \\ \\ Similarly, the limit of two functions multiplied together is the same as the product of their individual limits. Or, in mathematical notation,
 \begin{align*}
-\lim_{x \to c} \left[ \, f(x) \times g(x) \, \right] \ &\equiv \ \lim_{x \to c} f(x) \times \lim_{x \to c} g(x) \ \textrm{ for any value } c.
+\lim_{x \to c} \left[ \, f(x) \times g(x) \, \right] \ &\equiv \ \lim_{x \to c} f(x) \times \lim_{x \to c} g(x) \ \text{ for any value } c.
 \end{align*}
 \\ With these two properties made clear, we can easily start to demonstrate how we could work out the limit for our water level equation algebraically:
 \begin{align*}
@@ -94,30 +95,30 @@ y &= x^2
 to take a very simple example. 
 \\ \\ Let's say we wanted to find the family's average speed from 10 seconds to 60 seconds into their journey. Since
 \begin{align*}
-\textrm{avg. speed} &= \frac{\textrm{change in distance}}{\textrm{change in time}}
+\text{avg. speed} &= \frac{\text{change in distance}}{\text{change in time}}
 \end{align*}
 we take the change in distance, \(\Delta y\), and divide it by the change in time, \(\Delta x\). This gives us
 \begin{align*}
-\textrm{avg. speed} &= \frac{\Delta y}{\Delta x} \\ \\
-&= \frac{\textrm{new } x^2 - \textrm{old } x^2}{\textrm{new } x - \textrm{old } x} \\ \\
+\text{avg. speed} &= \frac{\Delta y}{\Delta x} \\ \\
+&= \frac{\text{new } x^2 - \text{old } x^2}{\text{new } x - \text{old } x} \\ \\
 &= \frac{60^2 - 10^2}{60 - 10} \\ \\
 &= \frac{3600 - 100}{50} \\  \\
-&= 70 \ \textrm{m/s}.
+&= 70 \ \text{m/s}.
 \end{align*}
 To find their speed between 59 seconds and 60 seconds into their journey, we use the same process:
 \begin{align*}
-\textrm{avg. speed} &= \frac{\Delta y}{\Delta x} \\ \\
+\text{avg. speed} &= \frac{\Delta y}{\Delta x} \\ \\
 &= \frac{60^2 - 59^2}{60 - 59} \\ \\
-&= 119 \ \textrm{m/s}.
+&= 119 \ \text{m/s}.
 \end{align*}
 But here's the thing: usually we rarely care about someone's average speed between two points. Ideally we'd want to know a general method for working out their speed \textbf{right now}, at a single point in time. In other words, when there is no change in time -- when \(\Delta x\) is 0. 
 \\ There's an obvious issue here. To do that would involve dividing by 0. So surely such a method would be impossible?
 \\ However, we can get around that problem using -- you guessed it -- the power of limits. Let's see what happens when we let \(\Delta x\) approach 0. To make things easier, we can refer to this incredibly tiny (but not zero!) value of \(\Delta x\) as d\(x\). And, let's refer to the resultant incredibly tiny value of \(\Delta y\) as d\(y\). 
-\\ Now, we want to find the value of \(\frac{\textrm{d}y}{\textrm{d}x}\). Using our limit definition, we have:
+\\ Now, we want to find the value of \(\frac{\text{d}y}{\text{d}x}\). Using our limit definition, we have:
 \begin{align*}
-\frac{\textrm{d}y}{\textrm{d}x} &= \lim_{\Delta x \to 0} \ \frac{\Delta y}{\Delta x} \\ \\
-\textrm{Remember that here, } y &= x^2 \textrm{ and so } \Delta y = \Delta(x^2) \\ \\
-\therefore{} \ \frac{\textrm{d}y}{\textrm{d}x} &= \lim_{\Delta x \to 0} \frac{\Delta(x^2)}{\Delta x}  \\ \\
+\frac{\text{d}y}{\text{d}x} &= \lim_{\Delta x \to 0} \ \frac{\Delta y}{\Delta x} \\ \\
+\text{Remember that here, } y &= x^2 \text{ and so } \Delta y = \Delta(x^2) \\ \\
+\therefore{} \ \frac{\text{d}y}{\text{d}x} &= \lim_{\Delta x \to 0} \frac{\Delta(x^2)}{\Delta x}  \\ \\
 &= \lim_{\Delta x \to 0} \frac{(x + \Delta x)^2 - x^2}{(x + \Delta x) - x} \\ \\
 &= \lim_{\Delta x \to 0} \frac{(x + \Delta x)^2 - x^2}{\Delta x} \\ \\
 &= \lim_{\Delta x \to 0} \frac{x^2 + 2x \ \Delta x + (\Delta x)^2 - x^2}{\Delta x} \\ \\
@@ -125,15 +126,15 @@ But here's the thing: usually we rarely care about someone's average speed betwe
 \end{align*}
 Again, because \(\Delta x\) \textit{approaches} 0, not \textit{equals} 0, we can divide both sides by \(\Delta x\) just fine. So we have:
 \begin{align*}
-\frac{\textrm{d}y}{\textrm{d}x} &= \lim_{\Delta x \to 0} \left( 2x + \Delta x \right) \\ \\
-&= 2x + 0 \ \textrm{ or simply, } \ 2x.
+\frac{\text{d}y}{\text{d}x} &= \lim_{\Delta x \to 0} \left( 2x + \Delta x \right) \\ \\
+&= 2x + 0 \ \text{ or simply, } \ 2x.
 \end{align*}
-\\ And there we have it. A general-use formula for the rate of change at a single point, when our function is \(y = x^2\). In this scenario, \(y\) represents the Leibniz family's distance from Cologne to Berlin, so \(\frac{\textrm{d}y}{\textrm{d}x}\) is their speed along their journey at any one point in time. But, of course, \(y = x^2\) could refer to whatever you wanted. 
-\\ And this method of finding the rate of change doesn't just work for \(y = x^2\) too. You could work out a \(\frac{\textrm{d}y}{\textrm{d}x}\) for whatever \footnote{Strictly speaking, only all functions that are continuous (that is, don't have any holes or suddenly cut from one value to another) can have a derivative that will apply across all its points. But any function that you can write at this stage will be like that.} function you like. 
-\\ Now for some jargon: instead of having to clunkily write \(\frac{\textrm{d}y}{\textrm{d}x}\) every time, mathematicians refer to this as a \textbf{derivative}. When talking about this scenario, we'd read it as ``the derivative of \(y\) with respect to \(x\)", or, ``the derivative of \(x^2\) with respect to \(x\)". And, since d\(y\) and d\(x\) are the minuscule differences in \(y\) and \(x\), they are called the \textbf{differentials} of \(y\) and \(x\).
+\\ And there we have it. A general-use formula for the rate of change at a single point, when our function is \(y = x^2\). In this scenario, \(y\) represents the Leibniz family's distance from Cologne to Berlin, so \(\frac{\text{d}y}{\text{d}x}\) is their speed along their journey at any one point in time. But, of course, \(y = x^2\) could refer to whatever you wanted. 
+\\ And this method of finding the rate of change doesn't just work for \(y = x^2\) too. You could work out a \(\frac{\text{d}y}{\text{d}x}\) for whatever \footnote{Strictly speaking, only all functions that are continuous (that is, don't have any holes or suddenly cut from one value to another) can have a derivative that will apply across all its points. But any function that you can write at this stage will be like that.} function you like. 
+\\ Now for some jargon: instead of having to clunkily write \(\frac{\text{d}y}{\text{d}x}\) every time, mathematicians refer to this as a \textbf{derivative}. When talking about this scenario, we'd read it as ``the derivative of \(y\) with respect to \(x\)", or, ``the derivative of \(x^2\) with respect to \(x\)". And, since d\(y\) and d\(x\) are the minuscule differences in \(y\) and \(x\), they are called the \textbf{differentials} of \(y\) and \(x\).
 \\ Now that we've just found out that all functions have a derivative, let's investigate them further. Patterns come up in surprising places in maths, and fortunately, there's a pattern for the derivative of power functions. To observe this, let's first find out the derivative of \(x^3\):
 \begin{align*}
-\frac{\textrm{d}(x^3)}{\textrm{d}x} &= \lim_{\Delta x \to 0} \frac{\Delta (x^3)}{\Delta x} \\ \\
+\frac{\text{d}(x^3)}{\text{d}x} &= \lim_{\Delta x \to 0} \frac{\Delta (x^3)}{\Delta x} \\ \\
 &= \lim_{\Delta x \to 0} \frac{(x + \Delta x)^3 - x^3}{(x + \Delta x) - x} \\ \\
 &= \lim_{\Delta x \to 0} \frac{(x + \Delta x)^3 - x^3}{\Delta x} \\ \\
 &= \lim_{\Delta x \to 0} \frac{x^3 + 3 x^2 \ \Delta x + 3x \ (\Delta x)^2 + (\Delta x)^3 - x^3}{\Delta x} \\ \\
@@ -142,15 +143,15 @@ Again, because \(\Delta x\) \textit{approaches} 0, not \textit{equals} 0, we can
 \end{align*}
 Now we have reduced the limit to a ``common sense" level. As \(\Delta x\) gets closer and closer to 0, the \(3x \ \Delta x\) and \((\Delta x)^2\) will get closer and closer to 0 too. Or, if we wanted to be as rigorous and clear as possible, we could split the limit up and have:
 \begin{align*}
-\frac{\textrm{d}(x^3)}{\textrm{d}x} = \lim_{\Delta x \to 0} (3x^2) + \lim_{\Delta x \to 0} (3x) \times \lim_{\Delta x \to 0} (\Delta x) + \lim_{\Delta x \to 0} \left[(\Delta x)^2\right].
+\frac{\text{d}(x^3)}{\text{d}x} = \lim_{\Delta x \to 0} (3x^2) + \lim_{\Delta x \to 0} (3x) \times \lim_{\Delta x \to 0} (\Delta x) + \lim_{\Delta x \to 0} \left[(\Delta x)^2\right].
 \end{align*}
 Which would make it even more clear that
 \begin{align*}
-\frac{\textrm{d}(x^3)}{\textrm{d}x} = 3x^2.
+\frac{\text{d}(x^3)}{\text{d}x} = 3x^2.
 \end{align*}
 To give us another example to work with, we can use the same process (which I have hidden for brevity) to arrive at
 \begin{align*}
-\frac{\textrm{d}(x^4)}{\textrm{d}x} &= 4x^3.
+\frac{\text{d}(x^4)}{\text{d}x} &= 4x^3.
 \end{align*}
 If we organise these findings to observe this pattern as easily as possible, we get:
 \begin{center}
@@ -158,22 +159,22 @@ If we organise these findings to observe this pattern as easily as possible, we 
 \hline
 \(y\) & \(x^2\) & \(x^3\) & \(x^4\) \\
 \hline
-\(\frac{\textrm{d}y}{\textrm{d}x}\) & \(2x^1\) & \(3x^2\) & \(4x^3\) \\ 
+\(\frac{\text{d}y}{\text{d}x}\) & \(2x^1\) & \(3x^2\) & \(4x^3\) \\ 
 \hline
 \end{tabular}
 \end{center}
 We can now notice how the derivative always is the original function multiplied by its power, with its power then reduced by 1. Or, in mathematical notation,
 \begin{align*}
-\frac{\textrm{d}(x^n)}{\textrm{d}x} & \ \equiv \ nx^{n-1} \ \textrm{ for any real } n.
+\frac{\text{d}(x^n)}{\text{d}x} & \ \equiv \ nx^{n-1} \ \text{ for any real } n.
 \end{align*}
 This pattern can be proved fairly easily for any natural power \(n\) using the binomial theorem, and is left as an exercise to the reader. Unfortunately, actually proving this pattern (known as the ``power rule") for any real power \(n\) will only be possible later on in this book.
 \\ \\ Finally, what if we want to sum two functions together? Say if we had \(y = x^4 + x^3 \), for example. Well, using our definition of a limit to find a general solution. For any two functions \(f(x)\) and \(g(x)\), 
 \begin{align*}
-	\frac{\textrm{d}\left[ f(x) + g(x) \right]}{\textrm{d}x} &= \lim_{\Delta x \to 0} \frac{f(x + \Delta x) - f(x) \ + \  g(x + \Delta x) - g(x)}{\Delta x} \\ \\
+	\frac{\text{d}\left[ f(x) + g(x) \right]}{\text{d}x} &= \lim_{\Delta x \to 0} \frac{f(x + \Delta x) - f(x) \ + \  g(x + \Delta x) - g(x)}{\Delta x} \\ \\
 	&= \lim_{\Delta x \to 0} \left[ \frac{f(x + \Delta x) - f(x)}{\Delta x} + \frac{g(x + \Delta x) - g(x)}{\Delta x} \right] \\ \\
 	&= \lim_{\Delta x \to 0} \left[ \frac{f(x + \Delta x) - f(x)}{\Delta x} \right] + \lim_{\Delta x \to 0} \left[ \frac{g(x + \Delta x) - g(x)}{\Delta x} \right] \\ \\
-	&= \frac{\textrm{d}[f(x)]}{\textrm{d}x} + \frac{\textrm{d}[g(x)]}{\textrm{d}x} \ \textrm{or, as most mathematicians write, } \frac{\textrm{d}f}{\textrm{d}x} + \D{g}{x} \\ \\
-	\textrm{Thus, } \ \D{y}{x} &= \D{(x^4)}{x} + \D{(x^3)}{x} \\ \\ &= 4x^3 + 3x^2.
+	&= \frac{\text{d}[f(x)]}{\text{d}x} + \frac{\text{d}[g(x)]}{\text{d}x} \ \text{or, as most mathematicians write, } \frac{\text{d}f}{\text{d}x} + \D{g}{x} \\ \\
+	\text{Thus, } \ \D{y}{x} &= \D{(x^4)}{x} + \D{(x^3)}{x} \\ \\ &= 4x^3 + 3x^2.
 \end{align*}
 \\ Given this, it is trivial to prove that 
 \begin{align*}
@@ -189,38 +190,43 @@ Previously, we established how to find the rate of change of any polynomial equa
 	v(t) &= 12 \, t.
 \end{align*} 
 Could they then work backwards to find an equation for the criminal's distance? 
-\\ \\ To do this, let's start by giving a name to the criminal's displacement. Since referring to it as \(d(t)\) could lead to confusion with \(\textrm{d}(t)\) -- a completely different concept -- we'll resort to the formal physics notation: \(s(t)\). So, we have 
+\\ \\ To do this, let's start by giving a name to the criminal's displacement. Since referring to it as \(d(t)\) could lead to confusion with \(\text{d}(t)\) -- a completely different concept -- we'll resort to the formal physics notation: \(s(t)\). So, we have 
 \begin{align*}
 v(t) &= \D{s}{t} \, .
 \end{align*}
-How do we then get to \(s(t)\)? 
-
-\iffalse
-\\ \\ It'd be simplest if we first looked at how to work out a solution for this, then what's actually going on behind it.
-\begin{align*}
-\textrm{Let } s(t) &= kt^n \ \textrm{, and } v(t) = at^p \\ \\
-\textrm{Now, we have that } v(t) &= \D{s}{t} \\ \\ 
-\Rightarrow at^p &= nkt^{n-1} \\ \\
-\Rightarrow a &= nk \ \textrm{, and } p = n - 1 \\ \\
-\textrm{Since we're going from } & v(t) \textrm{ to } s(t) \textrm{, we want to express } n \textrm{ and } k \textrm{ in terms of } a \textrm{ and } p \\ \\
-\textrm{So, we have } n &= p + 1 \\ \\
-\textrm{And, } k &= \frac{a}{n} \\ \\
-&= \frac{a}{p + 1} \\ \\
-\therefore{} \ kt^n &= \frac{a \, t^{\, p+1}}{p + 1} 
-\end{align*}
-In other words, to get to the original function, you increase the derivative's power then divide by that power. Applying this to our scenario, we have
-\begin{align*}
-at^p &= 12 \, t \\ \\
-\Rightarrow a &= 12, \ \textrm{and } t = 1 \\ \\
-\therefore{} \ s(t) &= \frac{12 t^2}{2} \\ \\
-&= 6t^2
-\end{align*}
-And to check our answer:
-\begin{align*}
-\D{(6t^2)}{t} &= 12t 
-\end{align*}
-as required.
-\\ \\ Now for the hard question: what did we just do here? If we perform this process on a function, what exactly \textit{is} our answer? We can explain quite happily what a derivative is in terms of a function, but what about our ``anti-derivative" here? 
-\fi
+How do we then get to our \(s(t)\)? 
+\\ \\ Well, we know that, if \(v(t)\) is a polynomial, then so must \(s(t)\). If we let 
+\begin{flalign*}
+	s(t) &= kt^n \\
+	\intertext{then } \ v(t) &= \D{(kt^n)}{t} = nkt^{n-1}. \\ \\
+	\intertext{Putting our power of \(v(t)\) into this, we have} 
+	n - 1 &= 1 \\ 
+	\Rightarrow n &= 2 \, . \\
+	\intertext{And, putting our coefficient of \(v(t)\) in, we get} 
+	nk &= 12 \\ 
+	\Rightarrow k &= 6 \, .
+	\intertext{So we have that \(s\), our ``antiderivative" of \(v\), is \(6t^2 \, \).} \\
+	\intertext{Well... almost. It is true that } \D{(6t^2)}{t} &= 12 \, t 
+	\intertext{as required. But, consider also} \D{(6t^2 + 1)}{t}, \ \ \D{(6t^2 + 15)}{t} \, , & \text{ and } \ \D{(6t^2 - 50)}{t} \, .
+	\intertext{Since the derivative of any constant is 0, surely these also equal \(12 \, t\) ? So our antiderivative doesn't have to \textit{just} be \(6t^2\) . In fact, \(6t^2 + c\) , for any constant \(c\) , would still be correct. To allow for this, we simply add \( + c\) to the end of our antiderivatives. So, we finally have}
+	s(t) &= 6t^2 + c
+	\intertext{If the police then told us that he was 12 metres into the road when they started recording his distance, we could then use this to solve for \(c\)...}
+	\text{When } t &= 0 \, , \ s(t) = 12 \\
+	\Rightarrow 6(0)^2 + c &= 12 \\
+	\Rightarrow c &= 12
+	\intertext{So in this particular example, \(s(t) = 6t^2 + 12\) . It's clear that, in theory \(c\) could have any value, however.}
+\end{flalign*}
+Now that we've got that example sorted, it's trivial to realise a general method for finding the antiderivative of a polynomial. 
+\begin{flalign*}
+	\intertext{In general, for any function}
+	f(x) &= kx^n
+	\intertext{its antiderivative, which we will call \(F(x)\), will be }
+	F(x) &= \frac{k}{n+1} \ x^{n + 1} + c \, .
+	\intertext{This can be verified easily; }
+	\D{F}{x} &= \frac{k}{n+1} \ (n+1) \ x^{(n+1) \, -1} \\ \\
+	&= kx^{(n+1) \, -1} \\ \\
+	&= kx^n \\ \\
+	&= f(x) \ \text{ as required.}
+\end{flalign*}
 \end{document}
 
