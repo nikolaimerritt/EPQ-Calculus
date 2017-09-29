@@ -1,8 +1,14 @@
 \documentclass[11pt, leqno]{article}
 \usepackage[margin=0.5in]{geometry}
+\usepackage[x11names]{xcolor}
 \usepackage{amsfonts,amsmath,amssymb,amsthm}
+\usepackage{float}
 \usepackage{ragged2e}
 \usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{multicol}
+\pgfplotsset{compat=1.5}
 \author{Nikolai Merritt}
 \title{Understanding Calculus for Beginners}
 \date{\vspace{-5ex}}
@@ -10,7 +16,12 @@
 \graphicspath{{Images/}}
 
 \begin{document}
-\newcommand{\D}[2]{\frac{\text{d}#1}{\text{d}#2}}
+\newcommand{\Diff}[1] {\mathop{\text{d}#1}}
+\newcommand{\Deriv}[2] {\frac{ \Diff{#1} }{ \Diff{#2} }}
+\newcommand{\DelFrac}[2]{\frac{\Delta #1}{\Delta #2}}
+\newcommand{\LimDeriv}[2]{ \lim_{\Delta #2 \to 0} \frac{#1(#2 + \Delta #2) - #1(#2)}{\Delta #2} }
+\newcommand{\NthDeriv}[3]{\frac{ \text{d}^{#3} #1} {\text{d} #2^{#3}}}
+\newcommand{\OutsideDeriv}[2]{\frac{ \text{d} }{ \text{d} #2 } \left( #1 \right)}
 \newcommand{\asreq}{\textrm{, as required.}}
 \maketitle
 
@@ -102,102 +113,129 @@ Prove the following propositions:
 
 \newpage
 \section{Deriving the Derivative}
-It's often very useful to know the rate of change of something. An obvious example is speed; without being able to how fast an object is going -- or, in other words, the rate of change of its distance vs time -- we'd all die in car crashes on our first day of driving. And there are many more examples: how fast diseases spread, the ebb and flow of the stock market, and the growth of populations, to name a few. However, the first example is probably the simplest.
-\\ Let's imagine that the Leibniz family is driving from Cologne to Berlin. Their distance in metres, \(y\), in terms of time in seconds, \(x\), is
-\begin{align*}
-y &= x^2
-\end{align*}
-to take a very simple example. 
-\\ \\ Let's say we wanted to find the family's average speed from 10 seconds to 60 seconds into their journey. Since
-\begin{align*}
-\text{avg. speed} &= \frac{\text{change in distance}}{\text{change in time}}
-\end{align*}
-we take the change in distance, \(\Delta y\), and divide it by the change in time, \(\Delta x\). This gives us
-\begin{align*}
-\text{avg. speed} &= \frac{\Delta y}{\Delta x} \\ \\
-&= \frac{\text{new } x^2 - \text{old } x^2}{\text{new } x - \text{old } x} \\ \\
-&= \frac{60^2 - 10^2}{60 - 10} \\ \\
-&= \frac{3600 - 100}{50} \\  \\
-&= 70 \ \text{m/s}.
-\end{align*}
-To find their speed between 59 seconds and 60 seconds into their journey, we use the same process:
-\begin{align*}
-\text{avg. speed} &= \frac{\Delta y}{\Delta x} \\ \\
-&= \frac{60^2 - 59^2}{60 - 59} \\ \\
-&= 119 \ \text{m/s}.
-\end{align*}
-But here's the thing: usually we rarely care about someone's average speed between two points. Ideally we'd want to know a general method for working out their speed \textbf{right now}, at a single point in time. In other words, when there is no change in time -- when \(\Delta x\) is 0. 
-\\ There's an obvious issue here. To do that would involve dividing by 0. So surely such a method would be impossible?
-\\ However, we can get around that problem using -- you guessed it -- the power of limits. Let's see what happens when we let \(\Delta x\) approach 0. To make things easier, we can refer to this incredibly tiny (but not zero!) value of \(\Delta x\) as d\(x\). And, let's refer to the resultant incredibly tiny value of \(\Delta y\) as d\(y\). 
-\\ Now, we want to find the value of \(\frac{\text{d}y}{\text{d}x}\). Using our limit definition, we have:
-\begin{align*}
-\frac{\text{d}y}{\text{d}x} &= \lim_{\Delta x \to 0} \ \frac{\Delta y}{\Delta x} \\ \\
-\text{Remember that here, } y &= x^2 \text{ and so } \Delta y = \Delta(x^2) \\ \\
-\therefore{} \ \frac{\text{d}y}{\text{d}x} &= \lim_{\Delta x \to 0} \frac{\Delta(x^2)}{\Delta x}  \\ \\
-&= \lim_{\Delta x \to 0} \frac{(x + \Delta x)^2 - x^2}{(x + \Delta x) - x} \\ \\
-&= \lim_{\Delta x \to 0} \frac{(x + \Delta x)^2 - x^2}{\Delta x} \\ \\
-&= \lim_{\Delta x \to 0} \frac{x^2 + 2x \ \Delta x + (\Delta x)^2 - x^2}{\Delta x} \\ \\
-&= \lim_{\Delta x \to 0} \frac{2x \ \Delta x + (\Delta x)^2}{\Delta x}. \\ \\
-\end{align*}
-Again, because \(\Delta x\) \textit{approaches} 0, not \textit{equals} 0, we can divide both sides by \(\Delta x\) just fine. So we have:
-\begin{align*}
-\frac{\text{d}y}{\text{d}x} &= \lim_{\Delta x \to 0} \left( 2x + \Delta x \right) \\ \\
-&= 2x + 0 \ \text{ or simply, } \ 2x.
-\end{align*}
-\\ And there we have it. A general-use formula for the rate of change at a single point, when our function is \(y = x^2\). In this scenario, \(y\) represents the Leibniz family's distance from Cologne to Berlin, so \(\frac{\text{d}y}{\text{d}x}\) is their speed along their journey at any one point in time. But, of course, \(y = x^2\) could refer to whatever you wanted. 
-\\ And this method of finding the rate of change doesn't just work for \(y = x^2\) too. You could work out a \(\frac{\text{d}y}{\text{d}x}\) for whatever \footnote{Strictly speaking, only all functions that are continuous (that is, don't have any holes or suddenly cut from one value to another) can have a derivative that will apply across all its points. But any function that you can write at this stage will be like that.} function you like. 
-\\ Now for some jargon: instead of having to clunkily write \(\frac{\text{d}y}{\text{d}x}\) every time, mathematicians refer to this as a \textbf{derivative}. When talking about this scenario, we'd read it as ``the derivative of \(y\) with respect to \(x\)", or, ``the derivative of \(x^2\) with respect to \(x\)". And, since d\(y\) and d\(x\) are the minuscule differences in \(y\) and \(x\), they are called the \textbf{differentials} of \(y\) and \(x\).
-\\ Now that we've just found out that all functions have a derivative, let's investigate them further. Patterns come up in surprising places in maths, and fortunately, there's a pattern for the derivative of power functions. To observe this, let's first find out the derivative of \(x^3\):
-\begin{align*}
-\frac{\text{d}(x^3)}{\text{d}x} &= \lim_{\Delta x \to 0} \frac{\Delta (x^3)}{\Delta x} \\ \\
-&= \lim_{\Delta x \to 0} \frac{(x + \Delta x)^3 - x^3}{(x + \Delta x) - x} \\ \\
-&= \lim_{\Delta x \to 0} \frac{(x + \Delta x)^3 - x^3}{\Delta x} \\ \\
-&= \lim_{\Delta x \to 0} \frac{x^3 + 3 x^2 \ \Delta x + 3x \ (\Delta x)^2 + (\Delta x)^3 - x^3}{\Delta x} \\ \\
-&= \lim_{\Delta x \to 0} \frac{3x^2 \ \Delta x + 3x \ (\Delta x)^2 + (\Delta x)^3}{\Delta x} \\ \\
-&= \lim_{\Delta x \to 0} \left[ 3x^2 + 3x \ \Delta x + (\Delta x)^2 \right]. \\
-\end{align*}
-Now we have reduced the limit to a ``common sense" level. As \(\Delta x\) gets closer and closer to 0, the \(3x \ \Delta x\) and \((\Delta x)^2\) will get closer and closer to 0 too. Or, if we wanted to be as rigorous and clear as possible, we could split the limit up and have:
-\begin{align*}
-\frac{\text{d}(x^3)}{\text{d}x} = \lim_{\Delta x \to 0} (3x^2) + \lim_{\Delta x \to 0} (3x) \times \lim_{\Delta x \to 0} (\Delta x) + \lim_{\Delta x \to 0} \left[(\Delta x)^2\right].
-\end{align*}
-Which would make it even more clear that
-\begin{align*}
-\frac{\text{d}(x^3)}{\text{d}x} = 3x^2.
-\end{align*}
-To give us another example to work with, we can use the same process (which I have hidden for brevity) to arrive at
-\begin{align*}
-\frac{\text{d}(x^4)}{\text{d}x} &= 4x^3.
-\end{align*}
-If we organise these findings to observe this pattern as easily as possible, we get:
-\begin{center}
-\begin{tabular}{||c|c|c|c||}
-\hline
-\(y\) & \(x^2\) & \(x^3\) & \(x^4\) \\
-\hline
-\(\frac{\text{d}y}{\text{d}x}\) & \(2x^1\) & \(3x^2\) & \(4x^3\) \\ 
-\hline
-\end{tabular}
-\end{center}
-We can now notice how the derivative always is the original function multiplied by its power, with its power then reduced by 1. Or, in mathematical notation,
-\begin{align*}
-\frac{\text{d}(x^n)}{\text{d}x} & \ \equiv \ nx^{n-1} \ \text{ for any real } n.
-\end{align*}
-This pattern can be proved fairly easily for any natural power \(n\) using the binomial theorem, and is left as an exercise to the reader. Unfortunately, actually proving this pattern (known as the ``power rule") for any real power \(n\) will only be possible later on in this book.
-\\ \\ Finally, what if we want to sum two functions together? Say if we had \(y = x^4 + x^3 \), for example. Well, using our definition of a limit to find a general solution. For any two functions \(f(x)\) and \(g(x)\), 
-\begin{align*}
-	\frac{\text{d}\left[ f(x) + g(x) \right]}{\text{d}x} &= \lim_{\Delta x \to 0} \frac{f(x + \Delta x) - f(x) \ + \  g(x + \Delta x) - g(x)}{\Delta x} \\ \\
-	&= \lim_{\Delta x \to 0} \left[ \frac{f(x + \Delta x) - f(x)}{\Delta x} + \frac{g(x + \Delta x) - g(x)}{\Delta x} \right] \\ \\
-	&= \lim_{\Delta x \to 0} \left[ \frac{f(x + \Delta x) - f(x)}{\Delta x} \right] + \lim_{\Delta x \to 0} \left[ \frac{g(x + \Delta x) - g(x)}{\Delta x} \right] \\ \\
-	&= \frac{\text{d}[f(x)]}{\text{d}x} + \frac{\text{d}[g(x)]}{\text{d}x} \ \text{or, as most mathematicians write, } \frac{\text{d}f}{\text{d}x} + \D{g}{x} \\ \\
-	\text{Thus, } \ \D{y}{x} &= \D{(x^4)}{x} + \D{(x^3)}{x} \\ \\ &= 4x^3 + 3x^2.
-\end{align*}
-\\ Given this, it is trivial to prove that 
-\begin{align*}
-	\D{\, [k \times f(x)]}{x} & \equiv k \times \D{f}{x}
-\end{align*}
-for any constant \(k\), and is also left as an exercise.
-\\ \\ This brings us to a close on the fundamental idea of the derivative and the differential. As with last section, I would highly recommend solving practice problems on these derivative properties until you are completely familiar with them, before moving on to our next topic.
+\subsection{Introduction to the concept}
+It's often very useful to know the rate of change of something. An obvious example is velocity; without being able to how fast an object is going -- or, in other words, the rate of change of its distance vs time -- we'd all die in car crashes on our first day of driving. And there are many more examples: how fast diseases spread, the ebb and flow of the stock market, and the growth of populations, to name a few. However, the first example is probably the simplest.
+\\ \\ Let's picture a scenario to demonstrate this. Imagine the Leibniz family is going to England on holiday. Arriving at Heathrow airport, they take a taxi to their hotel in central London -- a 20 minute journey. Their taxi driver is driving quite erratically to beat the London traffic. So it so happens that their distance in metres from Heathrow, \(s\), in terms of time passed in minutes, \(t\), is
+\begin{flalign*}
+	s(t) &= t^2 \ \text{ when } 0 \leq t \leq 20.
+\end{flalign*}
+Given this, it's very easy to find their average velocity across any section of their journey. Say we wanted to find their average velocity for the last 15 minutes. We know that 
+\begin{flalign*}
+	\text{avg velocity} &= \DelFrac{s}{t} = \frac{\text{new dist} - \text{old dist}}{\text{new time} - \text{old time}} \, . \\ \\
+	\intertext{By convention, let's refer to the starting time as \(t\) and our change in time as \(\Delta t\) \newline So, we have:} &
+	\begin{array} {l l l}
+		\text{old time} = t & \Rightarrow & \text{old dist} = t^2 \\
+		\text{new time} = t + \Delta t & \Rightarrow & \text{new dist} = (t + \Delta t)^2
+	\end{array}
+	\intertext{So, using this,}
+	\text{avg velocity} &= \frac{(t + \Delta t)^2 - t^2}{\Delta t} \\
+	\intertext{Using \(t = 5\) and \(\Delta t = 15\), we get:}
+	\text{avg velocity} &= \frac{(5 + 15)^2 - 5^2}{15} \\ \\
+	&= \frac{375}{15} \\ \\
+	&= 25 \, .
+\end{flalign*}
+\\ \\However in reality, we rarely care about someone's average velocity across a time period. It's far more common that we want to find the velocity \textbf{now}, at a single point in time. In other words, when there is no change in time. When \(\Delta t = 0\). 
+\\ \\ Unfortunately, we can't just plug in 0 for \(\Delta t\) and read off our answer. That would mean dividing by 0, and no one knows how to work out an answer that way. Instead, as with our previous problem, our only option is to use the method of limits and see what value our velocity approaches as we let \(\Delta t\) approach 0. 
+\\ \\ Let's refer to our incredibly tiny (but not zero!) change in time as \(\Diff{t}\). And, let's refer to our resultant incredibly tiny change in distance as \(\Diff{s}\).
+\\ \\Now, we want to find \(\Deriv{s}{t}\). Using our limit definition, we have:
+\begin{flalign*}
+	\Deriv{s}{t} &= \lim_{\Delta t \to 0} \DelFrac{s}{t} \\ \\
+	&= \lim_{\Delta t \to 0} \frac{(t + \Delta t)^2 - t^2}{\Delta t} \\ \\
+	&= \lim_{\Delta t \to 0} \frac{t^2 + 2t \, \Delta t + (\Delta t)^2 - t^2}{\Delta t} \\ \\
+	&= \lim_{\Delta t \to 0} \frac{2t \, \Delta t + (\Delta t)^2}{\Delta t} \, .
+	\intertext{Again, because \(\Delta t\) \textit{approaches} 0, not \textit{equals} 0, we can divide both sides by \(\Delta t\) just fine. So we have:}
+	\Deriv{s}{t} &= \lim_{\Delta t \to 0} \left(2t + \Delta t \right) \\ \\
+	&= 2t \, , \text{ by common sense.}
+\end{flalign*}
+And there we have it. A general-use formula for the family's velocity at any minute \(t\). Of course, \(\Deriv{s}{t} = 2t\) only when \(s(t) = t^2\). But this limit method could be used to find the rate of change of any function. 
+\\ \\Now for some jargon. Mathematicians would refer to our minuscule difference in \(t\), \(\Diff{t}\), as the \textbf{differential} of \(t\), and similarly, \(\Diff{s}\) is called the differential of \(s\). Our rate of change has a name too: \(\Deriv{s}{t}\) is called the \textbf{derivative} of \(s\). To make it clear that \(\Diff{s}\) is being divided by \(\Diff{t}\) (as opposed to some other differential), we could add ``with respect to \(t\)" at the end.
+%
+\\ \\ Now that we have found out that every \footnotemark function has a derivative, let's investigate this further. Patterns come up in all sorts of surprising places in maths, and fortunately, there's a pattern for the derivative of polynomials. To observe this, let's collect some information -- starting with \(x^3\)...
+\begin{flalign*}
+	\Deriv{(x^3)}{x} &= \lim_{\Delta x \to 0} \DelFrac{(x^3)}{x} \\ \\
+	&= \lim_{\Delta x \to 0} \frac{(x + \Delta x)^3 - x^3}{\Delta x} \\ \\
+	&= \lim_{\Delta x \to 0} \frac{x^3 + 3x^2 \, \Delta x + 3x (\Delta x)^2  + (\Delta x)^3 - x^3}{\Delta x} \\ \\
+	&= \lim_{\Delta x \to 0} \frac{3x^2 \, \Delta x + 3x (\Delta x)^2 + (\Delta x)^3}{\Delta x} \\ \\
+	&= \lim_{\Delta x \to 0} \left[ 3x^2 + 3x \, \Delta x + (\Delta x)^2 \right] \, .
+	\intertext{Now we have reduced it to a common sense level. As \(\Delta x\) gets closer and closer to 0, the \(3x \, \Delta x\) and \((\Delta x)^2 \) terms will get closer and closer to 0 too. So, we finally have, }
+	\Deriv{(x^3)}{x} &= 3x^2 \, .
+	\intertext{Through the same process, which I have hidden for brevity, we can arrive at}
+	\Deriv{(x^4)}{x} &= 4x^3
+	\intertext{and}
+	\Deriv{(x^5)}{x} &= 5x^4 \, .
+	%
+	\intertext{That should be enough information. Now let's lay present our findings.}
+	& \def\arraystretch{1.5}
+	\begin{array} {|l | l l|}
+		\hline
+		f(x) & & \Deriv{f}{x} \\ \hline \hline
+		x^2 & & 2x^1 \\ \hline
+		x^3 & & 3x^2 \\ \hline
+		x^4 & & 4x^3 \\ \hline
+		x^5 & & 5x^4 \\ \hline
+	\end{array}
+	\intertext{As we can see, the derivative of a power function seems to be the function multiplied by its power, then its own power is reduced by 1. Or, in mathematical notation, }
+	\Deriv{(x^n)}{x} &\equiv nx^{n-1} \ \ \text{for any } n \, .
+	\intertext{Notice how I showed this through a pattern, not by proving it. That's because proving it for any natural \(n\) is easy enough for you to do it! And as for \textbf{any} \(n\), it's definitely possible, but only by techniques in the next section. }
+\end{flalign*}
+\footnotetext{Strictly speaking, only functions that are continuous -- that is, don't have any sharp bends, vertical tangents, or gaps at any point in their range -- are differentialbe. But pretty much every function you've seen is like that.}
+\newpage
+\begin{flalign}
+	\intertext{Prove the following derivative rules. You may, without proof, quote the Binomial Theorem if required.}
+	\Deriv{\left[ f(x) + g(x) \right]}{x} & \equiv \Deriv{f}{x} + \Deriv{g}{x} \\ \nonumber \\
+	\Deriv{\left[ k \cdot f(x) \right] }{x} & \equiv k \, \Deriv{f}{x}  \ \text{ for any constant } k \\\nonumber \\
+	\Deriv{k}{x} &\equiv 0 \ \text{ for any constant } k \\ \nonumber \\
+	\Deriv{(kx^n)}{x} & \equiv nkx^{n-1} \ \text{for any constant } k \text{ and any natural number } n \\ \nonumber
+	%
+	\intertext{Hence find the following derivatives.}
+	\Deriv{\left(12x^3 + 3x^2\right)}{x} \\ \nonumber \\
+	\Deriv{\left(9y^2 - 2y^5 + 3y\right)}{y} \\ \nonumber \\
+	\Deriv{ \left(7u^3 + 3u^2 - 2u + 12\right)}{u} \\ \nonumber \\
+	\Deriv{\left( 8\phi^{12} + 3\phi^{10} + 9\phi^2 - 17 \right)}{\phi} \\ \nonumber \\
+	%
+	\intertext{Let} \nonumber \nolinebreak
+	\frac{\textrm{d}}{\textrm{d}x} \left( f \right) &\equiv \Deriv{f}{x}
+	\intertext{And let} \nonumber \nolinebreak
+	\NthDeriv{f}{x}{2} &\equiv \frac{\text{d}}{\text{d}x} \left( \Deriv{f}{x} \right) \ \equiv \ \Deriv{\left( \Deriv{f}{x} \right)}{x} \\ \nonumber
+	\intertext{Hence find} 
+	\NthDeriv{(x^3 + 2x^2 + 3x + 1)}{x}{2} \\ \nonumber \\
+	\NthDeriv{(3z^4 + 2z^3 + 3z)}{z}{2}
+\end{flalign}
+\newpage
+\subsection{The chain rule: the mother of all rules}
+Before we can proceed any further with derivatives, we must first understand the chain rule. It forms the foundation of so many things: finding derivatives of nested functions, integration by u-substitution, implicit differentiation, solving differential equations, parametric differentiation, and the list goes on... With something so useful, you'd think it's incredibly complicated, but that couldn't be further than the truth. 
+\\ \\ To arrive at this ``golden rule", let's quickly look at another way to define a derivative. 
 
+\begin{tikzpicture}
+		\begin{axis}
+		[
+			axis lines = left,	
+			domain = 0: 20,
+			ymin = 0,
+		]
+		\addplot [color = Firebrick2, samples = 100] {x^2 + 200};
+		%
+		\draw [blue] (axis cs: 10, 0) -- (axis cs: 10, 10^2 + 200);
+		\node [
+			label = {[yshift = 2ex] 180 : {$t$}	},
+			mark = none, 
+			fill,
+			inner sep = 2pt
+		]
+		at (axis cs: 10, 0) {};
+		%
+		\draw [blue] (axis cs: 15, 0) -- (axis cs: 15, 15^2 + 200);
+		\node [
+			label = {[yshift = 2ex] 180 : {$x$}	},
+			mark = none, 
+			fill,
+			inner sep = 2pt
+		]
+		at (axis cs: 15, 0) {};
+		
+		%\pgfplotsset{ticks = none};
+		\end{axis}
+\end{tikzpicture}
 \newpage
 \section{The Integral: an integral part of Calculus}
 \subsection{Going backwards: the antiderivative}
@@ -206,15 +244,15 @@ Previously, we established how to find the rate of change of any polynomial equa
 	v(t) &= 12 \, t.
 \end{align*} 
 Could they then work backwards to find an equation for the criminal's distance? 
-\\ \\ To do this, let's start by giving a name to the criminal's displacement. Since referring to it as \(d(t)\) could lead to confusion with \(\text{d}(t)\) -- a completely different concept -- we'll resort to the formal physics notation: \(s(t)\). So, we have 
+\\ \\ To do this, let's start by giving a name to the criminal's displacement. Since referring to it as \(d(t)\) could lead to confusion with \(\text{d}(t)\) -- a completely different concept -- we'll resort to the formal physics notation: \(s(t)\). So, we have
 \begin{align*}
-v(t) &= \D{s}{t} \, .
+v(t) &= \Deriv{s}{t} \, .
 \end{align*}
 How do we then get to our \(s(t)\)? 
 \\ \\ Well, we know that, if \(v(t)\) is a polynomial, then so must \(s(t)\). If we let 
 \begin{flalign*}
 	s(t) &= kt^n \\
-	\intertext{then } \ v(t) &= \D{(kt^n)}{t} = nkt^{n-1}. \\ \\
+	\intertext{then } \ v(t) &= \Deriv{(kt^n)}{t} = nkt^{n-1}. \\ \\
 	\intertext{Putting our power of \(v(t)\) into this, we have} 
 	n - 1 &= 1 \\ 
 	\Rightarrow n &= 2 \, . \\
@@ -222,8 +260,8 @@ How do we then get to our \(s(t)\)?
 	nk &= 12 \\ 
 	\Rightarrow k &= 6 \, .
 	\intertext{So we have that \(s\), our ``antiderivative" of \(v\), is \(6t^2 \, \).} \\
-	\intertext{Well... almost. It is true that } \D{(6t^2)}{t} &= 12 \, t 
-	\intertext{as required. But, consider also} \D{(6t^2 + 1)}{t}, \ \ \D{(6t^2 + 15)}{t} \, , & \text{ and } \ \D{(6t^2 - 50)}{t} \, .
+	\intertext{Well... almost. It is true that } \Deriv{(6t^2)}{t} &= 12 \, t 
+	\intertext{as required. But, consider also} \Deriv{(6t^2 + 1)}{t}, \ \ \Deriv{(6t^2 + 15)}{t} \, , & \text{ and } \ \Deriv{(6t^2 - 50)}{t} \, .
 	\intertext{Since the derivative of any constant is 0, surely these also equal \(12 \, t\) ? So our antiderivative doesn't have to \textit{just} be \(6t^2\) . In fact, \(6t^2 + c\) , for any constant \(c\) , would still be correct. To allow for this, we simply add \( + c\) to the end of our antiderivatives. So, we finally have}
 	s(t) &= 6t^2 + c
 	\intertext{If the police then told us that he was 12 metres into the road when they started recording his distance, we could then use this to solve for \(c\)...}
@@ -239,7 +277,7 @@ Now that we've got that example sorted, it's trivial to realise a general method
 	\intertext{its antiderivative, which we will call \(F(x)\), will be }
 	F(x) &= \frac{k}{n+1} \ x^{n + 1} + c \, .
 	\intertext{This can be verified easily; }
-	\D{F}{x} &= \frac{k}{n+1} \ (n+1) \ x^{(n+1) \, -1} \\ \\
+	\Deriv{F}{x} &= \frac{k}{n+1} \ (n+1) \ x^{(n+1) \, -1} \\ \\
 	&= kx^{(n+1) \, -1} \\ \\
 	&= kx^n \\ \\
 	&= f(x) \ \text{ as required.} \\
@@ -300,6 +338,64 @@ How could we go about finding the red area, between the points \(a\) and \(b\)?
 	&= \lim_{\psi \to 0} \frac{1}{\sqrt{a + \psi} + \sqrt{a}} \\ \\
 	&= \frac{1}{2\sqrt{a}} \\ \\
 	&= \frac{\sqrt{a}}{2a} \asreq
+	%
+	\intertext{2.1}
+	\Deriv{\left[ f(x) + g(x) \right]}{x} & \equiv \lim_{\Delta x \to 0} \frac{f(x + \Delta x) + g(x + \Delta x) - \left[ f(x) + g(x) \right] }\Delta{x} \\ \\
+	&\equiv \lim_{\Delta x \to 0} \frac{f(x + \Delta x) - f(x) + g(x + \Delta x) - g(x)}{\Delta x} \\ \\
+	&\equiv \lim_{\Delta x \to 0} \frac{f(x + \Delta x) - f(x)}{\Delta x} \ + \ \lim_{\Delta x \to 0} \frac{g(x + \Delta x) - g(x)}{\Delta x} \\ \\
+	&\equiv \Deriv{f}{x} + \Deriv{g}{x} \asreq
+	%
+	\intertext{2.2}
+	\Deriv{\left[ k \cdot f(x) \right]}{x} &\equiv \LimDeriv{k \cdot f}{x} \\ \\
+	&\equiv \lim_{\Delta x \to 0} k \cdot \LimDeriv{f}{x} \\ \\
+	&\equiv k \cdot \LimDeriv{f}{x} \\ \\
+	&\equiv k \cdot \Deriv{f}{x} \asreq
+	%
+	\intertext{2.3}
+	\intertext{Consider the function \(f(x) = k\), where \(k\) is any constant. Now, }
+	\Deriv{f}{x} &= \LimDeriv{f}{x} \\ \\
+	&= \lim_{\Delta x \to 0} \frac{k - k}{\Delta x} \\ \\
+	\intertext{Observe that the numerator is 0. Thus, our limit is already 0 before we even evaluate the limit.}
+	\therefore{} \Deriv{k}{x} &\equiv 0 \ \text{ for any constant } k \asreq
+	%
+	\intertext{2.4}
+	\intertext{Consider the derivative}
+	\Deriv{(x^n)}{x} &\ \text{for any natural number } n
+	\intertext{Now, }
+	\Deriv{(x^n)}{x} &\equiv \lim_{h \to 0} \frac{(x + h)^n - x^n}{h} \\ \\
+	\intertext{Note that \(h\) is being used instead of \(\Delta x\) purely to make the next line tidier. \newline By the Binomial Theorem, we can expand the brackets to get}
+	\Deriv{(x^n)}{x} &\equiv \lim_{h \to 0} \frac{ x^n + n \, h \, x^{n-1} + \binom{n}{2} \, x^{n-2} \, h^2 + \binom{n}{3} \, x^{n-3} \, h^3 + \binom{n}{4} \, x^{n-4} \, h^4 + \dotsc +  n \, x \, h^{n-1} + \, h^n - x^n}{h} \\ \\
+	&\equiv \lim_{h \to 0} \left[ n \, x^{x-1} + \binom{n}{2} \, x^{n-2} \, h + \binom{n}{3} \, x^{n-3} \, h^2 + \dotsc + h^{n-1} \right] \\ \\
+	&\equiv n \, x^{n-1}
+	\intertext{Therefore, by 2.2, }
+	\Deriv{(kx^n)}{x} &\equiv k \, n \, x^{n-1} \asreq
+	%
+	\intertext{2.5}
+	\intertext{By 2.1,}
+	\Deriv{\left(12x^3 + 3x^2\right)}{x} &= \Deriv{(12x^3)}{x} + \Deriv{(3x^2)}{x} \\ \\
+	\intertext{And by 2.2,}
+	\Deriv{\left(12x^3 + 3x^2\right)}{x} &= 12 \, \Deriv{(x^3)}{x} + 3 \, \Deriv{(x^2)}{x} \\ \\
+	&= 12 \cdot 3x^2 + 3 \cdot 2x \\ \\
+	&= 36x^2 + 6x
+	%
+	\intertext{2.6}
+	\intertext{Similarly, }
+	\Deriv{\left(9y^2 - 2y^5 + 3y\right)}{y} &= 18y - 10y^4 + 3y^0 \\ \\
+	&= 18y - 10y^4 + 3
+	%
+	\intertext{2.7}
+	\Deriv{ \left(7u^3 + 3u^2 - 2u + 12\right)}{u} &= 21u^2 + 3u - 2 \\ \\
+	%
+	\intertext{2.8}
+	\Deriv{\left( 8\phi^{12} + 3\phi^{10} + 9\phi^2 - 17 \right)}{\phi} &= 96\phi^{11} + 30\phi^9 + 18\phi
+	%
+	\intertext{2.9}
+	\NthDeriv{(x^3 + 2x^2 + 3x + 1)}{x}{2} &= \Deriv{(3x^2 + 4x + 3)}{x} \\ \\
+	&= 6x + 4
+	%
+	\intertext{2.10}
+	\NthDeriv{(3z^4 + 2z^3 + 3z)}{z}{2} &= \Deriv{(12z^3 + 6z^2 + 3)}{z} \\ \\
+	&= 36z^2 + 12z 
 \end{flalign*}
 \end{document}
 
