@@ -315,12 +315,18 @@ Traditionally, we'd let their distance, $\Delta x$, go to 0. But clearly, saying
 	\text{Would give us }   z &= (x^2 + 3)^3  \nn
 	\intertext{Now, how would we find $\Deriv{z}{x}$? \newline Starting with our new definition of a derivative, we have:}
 	\Deriv{z}{x} &= \lim_{x \to p} \frac{ z(y(x)) - z(y(p)) }{x - p} \nn
-	\intertext{Now, we can split this fraction to make it nicer:}	 
+	\intertext{Now, if $y(x) \ne y(p)$, we can split this fraction to make it nicer:}	 
 	\Deriv{z}{x} &= \lim_{x \to p} \left[ \frac{z(y(x)) - z(y(p))}{y(x) - y(p)} \cdot \frac{y(x) - y(p)}{x - p} \right] \nn
 	&= \lim_{x \to p} \frac{z(y(x)) - z(y(p))}{y(x) - y(p)} \cdot \lim_{x \to p} \frac{y(x) - y(p)}{x - p} \nn
 	\intertext{Aha! Our second limit is the derivative of $y$ with respect to $x$. And our first limit is in a similar form too; it's the tiny change in $z$ divided by the tiny change in $y$. In other words, the derivative of $z$ with respect to $y$. So,}
 	\Deriv{z}{x} &= \Deriv{z}{y} \, \Deriv{y}{x} \fs
-	\intertext{What a lovely result. }
+	\intertext{What a lovely result! See why we use fraction notation for derivatives now? It's almost as if the ``$\Diff{y}$"s are cancelling out.}
+	\intertext{But remember, we can only split this fraction if $y(x) \ne y(p)$; else, it'd be a division by zero. But here's the thing: if $y(x) = y(p)$, then there's no change in $y$ between our two points. So what's the rate of change, $\Deriv{y}{x}$ ? Zero. And if $y(x) = y(p)$, then, whatever $z$ is, $z(y(x)) = z(y(p))$. So by the same reasoning, there's no change in $z$ either. In other words, $\Deriv{z}{x}$ is also 0. Thus,}
+	\Deriv{z}{x} &= \Deriv{y}{x} = 0 \fs \nn
+	\intertext{Because both are zero,}
+	\Deriv{z}{x} &= \text{whatever we want} \times \Deriv{y}{x} \fs \nn
+	\intertext{Now, it'd be a nightmare if we had to use two different formulas for whether our the region around our functions is flat or not. We'd have to either draw the graphs out, or (ironically) use derivatives to check. And for what purpose? If it doesn't matter what we choose to have in the middle anyway, why not just make life easier for us? So, no matter what, we use one standard formula:}
+	\Deriv{z}{x} &= \Deriv{z}{y} \, \Deriv{y}{x} \fs
 \end{flalign}
 \nn
 
