@@ -3,6 +3,7 @@
 \usepackage[x11names]{xcolor}
 \usepackage{amsfonts,amsmath,amssymb,amsthm}
 \usepackage{float}
+\usepackage{etoolbox}
 \usepackage{ragged2e}
 \usepackage{graphicx}
 \usepackage{tikz}
@@ -16,13 +17,72 @@
 \graphicspath{{Images/}}
 
 \begin{document}
+
+\makeatletter
+\newif\if@gather@prefix 
+\preto\place@tag@gather{% 
+	\if@gather@prefix\iftagsleft@ 
+	\kern-\gdisplaywidth@ 
+	\rlap{\gather@prefix}% 
+	\kern\gdisplaywidth@ 
+	\fi\fi 
+} 
+\appto\place@tag@gather{% 
+	\if@gather@prefix\iftagsleft@\else 
+	\kern-\displaywidth 
+	\rlap{\gather@prefix}% 
+	\kern\displaywidth 
+	\fi\fi 
+	\global\@gather@prefixfalse 
+} 
+\preto\place@tag{% 
+	\if@gather@prefix\iftagsleft@ 
+	\kern-\gdisplaywidth@ 
+	\rlap{\gather@prefix}% 
+	\kern\displaywidth@ 
+	\fi\fi 
+} 
+\appto\place@tag{% 
+	\if@gather@prefix\iftagsleft@\else 
+	\kern-\displaywidth 
+	\rlap{\gather@prefix}% 
+	\kern\displaywidth 
+	\fi\fi 
+	\global\@gather@prefixfalse 
+} 
+\def\math@cr@@@align{%
+	\ifst@rred\nonumber\fi
+	\if@eqnsw \global\tag@true \fi
+	\global\advance\row@\@ne
+	\add@amps\maxfields@
+	\omit
+	\kern-\alignsep@
+	\if@gather@prefix\tag@true\fi
+	\iftag@
+	\setboxz@h{\@lign\strut@{\make@display@tag}}%
+	\place@tag
+	\fi
+	\ifst@rred\else\global\@eqnswtrue\fi
+	\global\lineht@\z@
+	\cr
+}
+\newcommand*{\beforetext}[1]{% 
+	\ifmeasuring@\else
+	\gdef\gather@prefix{#1}% 
+	\global\@gather@prefixtrue 
+	\fi
+} 
+\makeatother	
+	
 \newcommand{\Diff}[1] {\mathop{\text{d}#1}}
 \newcommand{\Deriv}[2] {\frac{ \Diff{#1} }{ \Diff{#2} }}
 \newcommand{\DelFrac}[2]{\frac{\Delta #1}{\Delta #2}}
 \newcommand{\LimDeriv}[2]{ \lim_{\Delta #2 \to 0} \frac{#1(#2 + \Delta #2) - #1(#2)}{\Delta #2} }
 \newcommand{\NthDeriv}[3]{\frac{ \text{d}^{#3} #1} {\text{d} #2^{#3}}}
 \newcommand{\OutsideDeriv}[2]{\frac{ \text{d} }{ \text{d} #2 } \left( #1 \right)}
-\newcommand{\asreq}{\textrm{, as required.}}
+\newcommand{\asreq}{\textrm{, as required.} \qed}
+\newcommand{\fs}{\, .}
+\newcommand{\nn}{\\ \nonumber \\}
 \maketitle
 
 \newpage
@@ -101,13 +161,13 @@ Great! Now we've reduced it to a simple common-sense question. Our first limit o
 \newpage
 Prove the following propositions:
 \begin{flalign}
-	\lim_{x \to -2} \left(12x^2 + 5 \right) &= 53 \\ \nonumber \\
-	\lim_{x \to a} \frac{(x + 3) \ (x - a)}{x - a} &= a + 3 \\ \nonumber \\
-	\lim_{x \to -2} \left( 12 \, \frac{x^2 - 4}{x + 2} \right) &= -48 \\ \nonumber \\
-	\lim_{h \to 0} \frac{(6 + h)^2 - 36}{h} &= 12 \\ \nonumber \\
-	\lim_{h \to 0} \ \frac{x}{3-\sqrt{x+9}} &= -6 \\ \nonumber \\
-	\lim_{U \to 0} \frac{1- \sqrt{1-U^2}}{U} &= 0 \\ \nonumber \\
-	\lim_{\alpha \to 0} \frac{1- \sqrt{1-\alpha^3}}{\alpha^3} &= \frac{1}{2} \\ \nonumber \\
+	\lim_{x \to -2} \left(12x^2 + 5 \right) &= 53 \nn
+	\lim_{x \to a} \frac{(x + 3) \ (x - a)}{x - a} &= a + 3 \nn
+	\lim_{x \to -2} \left( 12 \, \frac{x^2 - 4}{x + 2} \right) &= -48 \nn
+	\lim_{h \to 0} \frac{(6 + h)^2 - 36}{h} &= 12 \nn
+	\lim_{h \to 0} \ \frac{x}{3-\sqrt{x+9}} &= -6 \nn
+	\lim_{U \to 0} \frac{1- \sqrt{1-U^2}}{U} &= 0 \nn
+	\lim_{\alpha \to 0} \frac{1- \sqrt{1-\alpha^3}}{\alpha^3} &= \frac{1}{2} \nn
 	\lim_{\psi \to 0} \frac{\sqrt{a + \psi} - \sqrt{a}}{\psi} &= \frac{\sqrt{a}}{2a} 
 \end{flalign}
 
@@ -121,7 +181,7 @@ It's often very useful to know the rate of change of something. An obvious examp
 \end{flalign*}
 Given this, it's very easy to find their average velocity across any section of their journey. Say we wanted to find their average velocity for the last 15 minutes. We know that 
 \begin{flalign*}
-	\text{avg velocity} &= \DelFrac{s}{t} = \frac{\text{new dist} - \text{old dist}}{\text{new time} - \text{old time}} \, . \\ \\
+	\text{avg velocity} &= \DelFrac{s}{t} = \frac{\text{new dist} - \text{old dist}}{\text{new time} - \text{old time}} \fs \\ \\
 	\intertext{By convention, let's refer to the starting time as \(t\) and our change in time as \(\Delta t\) \newline So, we have:} &
 	\begin{array} {l l l}
 		\text{old time} = t & \Rightarrow & \text{old dist} = t^2 \\
@@ -132,23 +192,22 @@ Given this, it's very easy to find their average velocity across any section of 
 	\intertext{Using \(t = 5\) and \(\Delta t = 15\), we get:}
 	\text{avg velocity} &= \frac{(5 + 15)^2 - 5^2}{15} \\ \\
 	&= \frac{375}{15} \\ \\
-	&= 25 \, .
+	&= 25 \fs
 \end{flalign*}
 \\ \\However in reality, we rarely care about someone's average velocity across a time period. It's far more common that we want to find the velocity \textbf{now}, at a single point in time. In other words, when there is no change in time. When \(\Delta t = 0\). 
 \\ \\ Unfortunately, we can't just plug in 0 for \(\Delta t\) and read off our answer. That would mean dividing by 0, and no one knows how to work out an answer that way. Instead, as with our previous problem, our only option is to use the method of limits and see what value our velocity approaches as we let \(\Delta t\) approach 0. 
-\\ \\ Let's refer to our incredibly tiny (but not zero!) change in time as \(\Diff{t}\). And, let's refer to our resultant incredibly tiny change in distance as \(\Diff{s}\).
-\\ \\Now, we want to find \(\Deriv{s}{t}\). Using our limit definition, we have:
+\\ \\ Let's give a name to our velocity at a single point. We'll call this $\Deriv{s}{t} \fs$ Now, using our limit definition, we have:
 \begin{flalign*}
 	\Deriv{s}{t} &= \lim_{\Delta t \to 0} \DelFrac{s}{t} \\ \\
 	&= \lim_{\Delta t \to 0} \frac{(t + \Delta t)^2 - t^2}{\Delta t} \\ \\
 	&= \lim_{\Delta t \to 0} \frac{t^2 + 2t \, \Delta t + (\Delta t)^2 - t^2}{\Delta t} \\ \\
-	&= \lim_{\Delta t \to 0} \frac{2t \, \Delta t + (\Delta t)^2}{\Delta t} \, .
+	&= \lim_{\Delta t \to 0} \frac{2t \, \Delta t + (\Delta t)^2}{\Delta t} \fs
 	\intertext{Again, because \(\Delta t\) \textit{approaches} 0, not \textit{equals} 0, we can divide both sides by \(\Delta t\) just fine. So we have:}
 	\Deriv{s}{t} &= \lim_{\Delta t \to 0} \left(2t + \Delta t \right) \\ \\
 	&= 2t \, , \text{ by common sense.}
 \end{flalign*}
 And there we have it. A general-use formula for the family's velocity at any minute \(t\). Of course, \(\Deriv{s}{t} = 2t\) only when \(s(t) = t^2\). But this limit method could be used to find the rate of change of any function. 
-\\ \\Now for some jargon. Mathematicians would refer to our minuscule difference in \(t\), \(\Diff{t}\), as the \textbf{differential} of \(t\), and similarly, \(\Diff{s}\) is called the differential of \(s\). Our rate of change has a name too: \(\Deriv{s}{t}\) is called the \textbf{derivative} of \(s\). To make it clear that \(\Diff{s}\) is being divided by \(\Diff{t}\) (as opposed to some other differential), we could add ``with respect to \(t\)" at the end.
+\\ \\Now for some jargon. Our instant rate of change in $s$, $\Deriv{s}{t}$ is called the derivative of $s$. And the method we just used to find it, by dealing with tiny differences in $s$ and $t$, is called differentiation. Note that $\Deriv{s}{t}$ is \textbf{not} actually a fraction. It's the \textbf{limit} of a fraction, yes, but $\Diff{s}$ and $\Diff{t}$ don't make any sense by themselves. For reasons we'll see later on, it's useful to write derivatives the same way we write fractions. But that's as far as it goes.
 %
 \\ \\ Now that we have found out that every \footnotemark function has a derivative, let's investigate this further. Patterns come up in all sorts of surprising places in maths, and fortunately, there's a pattern for the derivative of polynomials. To observe this, let's collect some information -- starting with \(x^3\)...
 \begin{flalign*}
@@ -156,13 +215,13 @@ And there we have it. A general-use formula for the family's velocity at any min
 	&= \lim_{\Delta x \to 0} \frac{(x + \Delta x)^3 - x^3}{\Delta x} \\ \\
 	&= \lim_{\Delta x \to 0} \frac{x^3 + 3x^2 \, \Delta x + 3x (\Delta x)^2  + (\Delta x)^3 - x^3}{\Delta x} \\ \\
 	&= \lim_{\Delta x \to 0} \frac{3x^2 \, \Delta x + 3x (\Delta x)^2 + (\Delta x)^3}{\Delta x} \\ \\
-	&= \lim_{\Delta x \to 0} \left[ 3x^2 + 3x \, \Delta x + (\Delta x)^2 \right] \, .
+	&= \lim_{\Delta x \to 0} \left[ 3x^2 + 3x \, \Delta x + (\Delta x)^2 \right] \fs
 	\intertext{Now we have reduced it to a common sense level. As \(\Delta x\) gets closer and closer to 0, the \(3x \, \Delta x\) and \((\Delta x)^2 \) terms will get closer and closer to 0 too. So, we finally have, }
-	\Deriv{(x^3)}{x} &= 3x^2 \, .
+	\Deriv{(x^3)}{x} &= 3x^2 \fs
 	\intertext{Through the same process, which I have hidden for brevity, we can arrive at}
 	\Deriv{(x^4)}{x} &= 4x^3
 	\intertext{and}
-	\Deriv{(x^5)}{x} &= 5x^4 \, .
+	\Deriv{(x^5)}{x} &= 5x^4 \fs
 	%
 	\intertext{That should be enough information. Now let's lay present our findings.}
 	& \def\arraystretch{1.5}
@@ -175,67 +234,96 @@ And there we have it. A general-use formula for the family's velocity at any min
 		x^5 & & 5x^4 \\ \hline
 	\end{array}
 	\intertext{As we can see, the derivative of a power function seems to be the function multiplied by its power, then its own power is reduced by 1. Or, in mathematical notation, }
-	\Deriv{(x^n)}{x} &\equiv nx^{n-1} \ \ \text{for any } n \, .
+	\Deriv{(x^n)}{x} &\equiv nx^{n-1} \ \ \text{for any } n \fs
 	\intertext{Notice how I showed this through a pattern, not by proving it. That's because proving it for any natural \(n\) is easy enough for you to do it! And as for \textbf{any} \(n\), it's definitely possible, but only by techniques in the next section. }
 \end{flalign*}
 \footnotetext{Strictly speaking, only functions that are continuous -- that is, don't have any sharp bends, vertical tangents, or gaps at any point in their range -- are differentialbe. But pretty much every function you've seen is like that.}
 \newpage
 \begin{flalign}
 	\intertext{Prove the following derivative rules. You may, without proof, quote the Binomial Theorem if required.}
-	\Deriv{\left[ f(x) + g(x) \right]}{x} & \equiv \Deriv{f}{x} + \Deriv{g}{x} \\ \nonumber \\
+	\Deriv{\left[ f(x) + g(x) \right]}{x} & \equiv \Deriv{f}{x} + \Deriv{g}{x} \nn
 	\Deriv{\left[ k \cdot f(x) \right] }{x} & \equiv k \, \Deriv{f}{x}  \ \text{ for any constant } k \\\nonumber \\
-	\Deriv{k}{x} &\equiv 0 \ \text{ for any constant } k \\ \nonumber \\
+	\Deriv{k}{x} &\equiv 0 \ \text{ for any constant } k \nn
 	\Deriv{(kx^n)}{x} & \equiv nkx^{n-1} \ \text{for any constant } k \text{ and any natural number } n \\ \nonumber
 	%
 	\intertext{Hence find the following derivatives.}
-	\Deriv{\left(12x^3 + 3x^2\right)}{x} \\ \nonumber \\
-	\Deriv{\left(9y^2 - 2y^5 + 3y\right)}{y} \\ \nonumber \\
-	\Deriv{ \left(7u^3 + 3u^2 - 2u + 12\right)}{u} \\ \nonumber \\
-	\Deriv{\left( 8\phi^{12} + 3\phi^{10} + 9\phi^2 - 17 \right)}{\phi} \\ \nonumber \\
+	\Deriv{\left(12x^3 + 3x^2\right)}{x} \nn
+	\Deriv{\left(9y^2 - 2y^5 + 3y\right)}{y} \nn
+	\Deriv{ \left(7u^3 + 3u^2 - 2u + 12\right)}{u} \nn
+	\Deriv{\left( 8\phi^{12} + 3\phi^{10} + 9\phi^2 - 17 \right)}{\phi} \nn
 	%
 	\intertext{Let} \nonumber \nolinebreak
 	\frac{\textrm{d}}{\textrm{d}x} \left( f \right) &\equiv \Deriv{f}{x}
 	\intertext{And let} \nonumber \nolinebreak
 	\NthDeriv{f}{x}{2} &\equiv \frac{\text{d}}{\text{d}x} \left( \Deriv{f}{x} \right) \ \equiv \ \Deriv{\left( \Deriv{f}{x} \right)}{x} \\ \nonumber
 	\intertext{Hence find} 
-	\NthDeriv{(x^3 + 2x^2 + 3x + 1)}{x}{2} \\ \nonumber \\
+	\NthDeriv{(x^3 + 2x^2 + 3x + 1)}{x}{2} \nn
 	\NthDeriv{(3z^4 + 2z^3 + 3z)}{z}{2}
 \end{flalign}
 \newpage
 \subsection{The chain rule: the mother of all rules}
-Before we can proceed any further with derivatives, we must first understand the chain rule. It forms the foundation of so many things: finding derivatives of nested functions, integration by u-substitution, implicit differentiation, solving differential equations, parametric differentiation, and the list goes on... With something so useful, you'd think it's incredibly complicated, but that couldn't be further than the truth. 
-\\ \\ To arrive at this ``golden rule", let's quickly look at another way to define a derivative. 
+Before we can proceed any further with derivatives, we must first understand the chain rule. It forms the foundation of so many things: finding derivatives of nested functions, integration by u-substitution, implicit differentiation, solving differential equations, parametric differentiation, and the list goes on... With something so useful, you'd think it's incredibly complicated, but that couldn't be further than the truth. \nn
+First off, let's look at a slightly different way to define a derivative. As with our last way, we start by considering two points along the x-axis, which we shall call $x$ and $p$. Visually, we have: \nn 
 
 \begin{tikzpicture}
-		\begin{axis}
-		[
-			axis lines = left,	
-			domain = 0: 20,
-			ymin = 0,
-		]
-		\addplot [color = Firebrick2, samples = 100] {x^2 + 200};
-		%
-		\draw [blue] (axis cs: 10, 0) -- (axis cs: 10, 10^2 + 200);
-		\node [
-			label = {[yshift = 2ex] 180 : {$t$}	},
-			mark = none, 
-			fill,
-			inner sep = 2pt
-		]
-		at (axis cs: 10, 0) {};
-		%
-		\draw [blue] (axis cs: 15, 0) -- (axis cs: 15, 15^2 + 200);
-		\node [
-			label = {[yshift = 2ex] 180 : {$x$}	},
-			mark = none, 
-			fill,
-			inner sep = 2pt
-		]
-		at (axis cs: 15, 0) {};
-		
-		%\pgfplotsset{ticks = none};
-		\end{axis}
-\end{tikzpicture}
+	\begin{axis} [
+		axis lines = left,
+		xlabel = $x$,
+		ylabel = $y$,				
+	]
+	\addplot [color = cyan, domain = 0: 20, very thick] {x^2};	
+	\pgfplotsset{ticks = none};
+	\draw [red] (axis cs: 10, 0) -- (axis cs: 10, 10^2);
+	\node [
+		label = {
+			[left, red, yshift = 2.1ex, xshift = 0.3em] 180: {$x$}
+		},
+		circle,
+		fill,
+		inner sep = 0.2pt,
+	]
+	at (axis cs: 10, 3) {};
+	\draw [red](axis cs: 15, 0) -- (axis cs: 15, 15^2);
+	\node [
+		label = {
+			[left, red, yshift = 2.1ex, xshift = 0.3em] 180: {$p$}
+		},
+		circle,
+		fill,
+		inner sep = 0.2pt,
+	]
+	at (axis cs: 15, 3) {};
+	\draw [<->, color = magenta](axis cs: 10.5, 90) -- node[above] {$\Delta x$} (axis cs: 14.5, 90);
+	\end{axis}
+\end{tikzpicture} \nn
+Traditionally, we'd let their distance, $\Delta x$, go to 0. But clearly, saying ``let's the distance between $x$ and $p$ go to 0" is the same thing as saying ``let $x$ get closer and closer to $p$". So we have two identical ways of writing a derivative: 
+\begin{flalign}
+	 \Deriv{y}{x} &\equiv \LimDeriv{y}{x}  \nn
+	\intertext{and }   
+	\Deriv{y}{x} &\equiv \lim_{x \to p} \frac{y(x) - y(p)}{x - p} \fs  
+	\intertext{More offen than not, it's easiest to use the `` $\Delta x$ to 0 " definition. But sometimes, it's easier to use the ``$x$ to $p$" one. For instance, using that method:}
+	 \Deriv{(x^2)}{x} &= \lim_{x \to p} \frac{x^2 - p^2}{x - p}  \nn	
+	  &= \lim_{x \to p} \frac{(x - p) \, (x + p)}{x - p}  \nn
+	  &= \lim_{x \to p} \left( x + p \right)  \nn
+	  	&= 2p 
+	\intertext{Or, because $p$ can be anywhere along the x-axis, we can just replace it with $x$ for convenience, like this:}
+	  	\Deriv{(x^2)}{x} &= 2x  
+	\intertext{Which is a bit nicer than having to deal with $(\Delta x)^2$, dividing by $\Delta x$, etc.}
+	\intertext{Now, an example where this definition is a lot nicer is in deriving the chain rule. \newline Consider the chain function}
+	  & z(y(x))   \nn
+	\text{For example }   z(y) &= y^3 \ \text{ and } \ y(x) + x^2 + 3   \nn
+	\text{Would give us }   z &= (x^2 + 3)^3  \nn
+	\intertext{Now, how would we find $\Deriv{z}{x}$? \newline Starting with our new definition of a derivative, we have:}
+	\Deriv{z}{x} &= \lim_{x \to p} \frac{ z(y(x)) - z(y(p)) }{x - p} \nn
+	\intertext{Now, we can split this fraction to make it nicer:}	 
+	\Deriv{z}{x} &= \lim_{x \to p} \left[ \frac{z(y(x)) - z(y(p))}{y(x) - y(p)} \cdot \frac{y(x) - y(p)}{x - p} \right] \nn
+	&= \lim_{x \to p} \frac{z(y(x)) - z(y(p))}{y(x) - y(p)} \cdot \lim_{x \to p} \frac{y(x) - y(p)}{x - p} \nn
+	\intertext{Aha! Our second limit is the derivative of $y$ with respect to $x$. And our first limit is in a similar form too; it's the tiny change in $z$ divided by the tiny change in $y$. In other words, the derivative of $z$ with respect to $y$. So,}
+	\Deriv{z}{x} &= \Deriv{z}{y} \, \Deriv{y}{x} \fs
+	\intertext{What a lovely result. }
+\end{flalign}
+\nn
+
 \newpage
 \section{The Integral: an integral part of Calculus}
 \subsection{Going backwards: the antiderivative}
@@ -246,7 +334,7 @@ Previously, we established how to find the rate of change of any polynomial equa
 Could they then work backwards to find an equation for the criminal's distance? 
 \\ \\ To do this, let's start by giving a name to the criminal's displacement. Since referring to it as \(d(t)\) could lead to confusion with \(\text{d}(t)\) -- a completely different concept -- we'll resort to the formal physics notation: \(s(t)\). So, we have
 \begin{align*}
-v(t) &= \Deriv{s}{t} \, .
+v(t) &= \Deriv{s}{t} \fs
 \end{align*}
 How do we then get to our \(s(t)\)? 
 \\ \\ Well, we know that, if \(v(t)\) is a polynomial, then so must \(s(t)\). If we let 
@@ -255,13 +343,13 @@ How do we then get to our \(s(t)\)?
 	\intertext{then } \ v(t) &= \Deriv{(kt^n)}{t} = nkt^{n-1}. \\ \\
 	\intertext{Putting our power of \(v(t)\) into this, we have} 
 	n - 1 &= 1 \\ 
-	\Rightarrow n &= 2 \, . \\
+	\Rightarrow n &= 2 \fs \\
 	\intertext{And, putting our coefficient of \(v(t)\) in, we get} 
 	nk &= 12 \\ 
-	\Rightarrow k &= 6 \, .
+	\Rightarrow k &= 6 \fs
 	\intertext{So we have that \(s\), our ``antiderivative" of \(v\), is \(6t^2 \, \).} \\
 	\intertext{Well... almost. It is true that } \Deriv{(6t^2)}{t} &= 12 \, t 
-	\intertext{as required. But, consider also} \Deriv{(6t^2 + 1)}{t}, \ \ \Deriv{(6t^2 + 15)}{t} \, , & \text{ and } \ \Deriv{(6t^2 - 50)}{t} \, .
+	\intertext{as required. But, consider also} \Deriv{(6t^2 + 1)}{t}, \ \ \Deriv{(6t^2 + 15)}{t} \, , & \text{ and } \ \Deriv{(6t^2 - 50)}{t} \fs
 	\intertext{Since the derivative of any constant is 0, surely these also equal \(12 \, t\) ? So our antiderivative doesn't have to \textit{just} be \(6t^2\) . In fact, \(6t^2 + c\) , for any constant \(c\) , would still be correct. To allow for this, we simply add \( + c\) to the end of our antiderivatives. So, we finally have}
 	s(t) &= 6t^2 + c
 	\intertext{If the police then told us that he was 12 metres into the road when they started recording his distance, we could then use this to solve for \(c\)...}
@@ -275,7 +363,7 @@ Now that we've got that example sorted, it's trivial to realise a general method
 	\intertext{In general, for any function}
 	f(x) &= kx^n
 	\intertext{its antiderivative, which we will call \(F(x)\), will be }
-	F(x) &= \frac{k}{n+1} \ x^{n + 1} + c \, .
+	F(x) &= \frac{k}{n+1} \ x^{n + 1} + c \fs
 	\intertext{This can be verified easily; }
 	\Deriv{F}{x} &= \frac{k}{n+1} \ (n+1) \ x^{(n+1) \, -1} \\ \\
 	&= kx^{(n+1) \, -1} \\ \\

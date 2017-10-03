@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.9.5)  29 SEP 2017 10:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.9.5)  2 OCT 2017 12:12
 entering extended mode
 **./GuideToCalculus.tex
 (GuideToCalculus.tex
@@ -176,6 +176,10 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@float@everytoks=\toks29
 \@floatcapt=\box29
 )
+(C:\Users\Nikolai\AppData\Roaming\MiKTeX\2.9\tex\latex\etoolbox\etoolbox.sty
+Package: etoolbox 2017/01/02 v2.4 e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count104
+)
 (C:\Users\Nikolai\AppData\Roaming\MiKTeX\2.9\tex\latex\ms\ragged2e.sty
 Package: ragged2e 2009/05/21 v2.1 ragged2e Package (MS)
 
@@ -267,10 +271,10 @@ iltered.code.tex
 \pgf@yc=\dimen131
 \w@pgf@writea=\write3
 \r@pgf@reada=\read1
-\c@pgf@counta=\count104
-\c@pgf@countb=\count105
-\c@pgf@countc=\count106
-\c@pgf@countd=\count107
+\c@pgf@counta=\count105
+\c@pgf@countb=\count106
+\c@pgf@countc=\count107
+\c@pgf@countd=\count108
 \t@pgf@toka=\toks34
 \t@pgf@tokb=\toks35
 \t@pgf@tokc=\toks36
@@ -292,8 +296,8 @@ File: pgfsys-common-pdf.def 2013/10/10  (rcs-revision 1.13)
 (C:\Users\Nikolai\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\systemlayer\pgfsys
 softpath.code.tex
 File: pgfsyssoftpath.code.tex 2013/09/09  (rcs-revision 1.9)
-\pgfsyssoftpath@smallbuffer@items=\count108
-\pgfsyssoftpath@bigbuffer@items=\count109
+\pgfsyssoftpath@smallbuffer@items=\count109
+\pgfsyssoftpath@bigbuffer@items=\count110
 )
 (C:\Users\Nikolai\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\systemlayer\pgfsys
 protocol.code.tex
@@ -312,7 +316,7 @@ ode.tex)
 (C:\Users\Nikolai\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\math\pgfmathparser
 .code.tex
 \pgfmath@dimen=\dimen132
-\pgfmath@count=\count110
+\pgfmath@count=\count111
 \pgfmath@box=\box31
 \pgfmath@toks=\toks37
 \pgfmath@stack@operand=\toks38
@@ -338,7 +342,7 @@ ons.misc.code.tex)
 ons.integerarithmetics.code.tex)))
 (C:\Users\Nikolai\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\math\pgfmathfloat.
 code.tex
-\c@pgfmathroundto@lastzeros=\count111
+\c@pgfmathroundto@lastzeros=\count112
 ))
 (C:\Users\Nikolai\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\basiclayer\pgfcore
 points.code.tex
@@ -376,7 +380,7 @@ File: pgfcorescopes.code.tex 2015/05/08  (rcs-revision 1.46)
 \pgfpic=\box32
 \pgf@hbox=\box33
 \pgf@layerbox@main=\box34
-\pgf@picture@serial@count=\count112
+\pgf@picture@serial@count=\count113
 )
 (C:\Users\Nikolai\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\basiclayer\pgfcore
 graphicstate.code.tex
@@ -411,7 +415,7 @@ File: pgfcorearrows.code.tex 2015/05/14  (rcs-revision 1.43)
 shade.code.tex
 File: pgfcoreshade.code.tex 2013/07/15  (rcs-revision 1.15)
 \pgf@max=\dimen156
-\pgf@sys@shading@range@num=\count113
+\pgf@sys@shading@range@num=\count114
 )
 (C:\Users\Nikolai\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\basiclayer\pgfcore
 image.code.tex
@@ -480,7 +484,7 @@ Package: tikz 2015/08/07 v3.0.1a (rcs-revision 1.151)
 (C:\Users\Nikolai\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\libraries\pgflibra
 ryplothandlers.code.tex
 File: pgflibraryplothandlers.code.tex 2013/08/31 v3.0.1a (rcs-revision 1.20)
-\pgf@plot@mark@count=\count114
+\pgf@plot@mark@count=\count115
 \pgfplotmarksize=\dimen161
 )
 \tikz@lastx=\dimen162
@@ -493,19 +497,19 @@ File: pgflibraryplothandlers.code.tex 2013/08/31 v3.0.1a (rcs-revision 1.20)
 \tikz@figbox@bg=\box38
 \tikz@tempbox=\box39
 \tikz@tempbox@bg=\box40
-\tikztreelevel=\count115
-\tikznumberofchildren=\count116
-\tikznumberofcurrentchild=\count117
-\tikz@fig@count=\count118
+\tikztreelevel=\count116
+\tikznumberofchildren=\count117
+\tikznumberofcurrentchild=\count118
+\tikz@fig@count=\count119
 
 (C:\Users\Nikolai\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\modules\pgfmodulem
 atrix.code.tex
 File: pgfmodulematrix.code.tex 2013/09/17  (rcs-revision 1.8)
-\pgfmatrixcurrentrow=\count119
-\pgfmatrixcurrentcolumn=\count120
-\pgf@matrix@numberofcolumns=\count121
+\pgfmatrixcurrentrow=\count120
+\pgfmatrixcurrentcolumn=\count121
+\pgf@matrix@numberofcolumns=\count122
 )
-\tikz@expandcount=\count122
+\tikz@expandcount=\count123
 
 (C:\Users\Nikolai\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\frontendlayer\tikz
 \libraries\tikzlibrarytopaths.code.tex
@@ -524,8 +528,8 @@ code.tex
 \t@pgfplots@tokb=\toks43
 \t@pgfplots@tokc=\toks44
 \pgfplots@tmpa=\dimen168
-\c@pgfplots@coordindex=\count123
-\c@pgfplots@scanlineindex=\count124
+\c@pgfplots@coordindex=\count124
+\c@pgfplots@scanlineindex=\count125
 
 (C:\Users\Nikolai\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\sys\pgfplotss
 ysgeneric.code.tex))
@@ -541,7 +545,7 @@ Package pgfplots: loading complementary arithmetics for your pgf version...
 b\pgfplotsoldpgfsupp_pgflibraryfpu.code.tex)
 (C:\Users\Nikolai\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\oldpgfcompati
 b\pgfplotsoldpgfsupp_pgfmathfloat.code.tex
-\c@pgfmathroundto@lastzeros=\count125
+\c@pgfmathroundto@lastzeros=\count126
 ))
 (C:\Users\Nikolai\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\util\pgfplots
 util.code.tex
@@ -551,13 +555,13 @@ util.code.tex
 \pgfplotsliststructureext.code.tex)
 (C:\Users\Nikolai\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\liststructure
 \pgfplotsarray.code.tex
-\c@pgfplotsarray@tmp=\count126
+\c@pgfplotsarray@tmp=\count127
 )
 (C:\Users\Nikolai\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\liststructure
 \pgfplotsmatrix.code.tex)
 (C:\Users\Nikolai\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\numtable\pgfp
 lotstableshared.code.tex
-\c@pgfplotstable@counta=\count127
+\c@pgfplotstable@counta=\count128
 \t@pgfplotstable@a=\toks45
 )
 (C:\Users\Nikolai\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\liststructure
@@ -570,7 +574,7 @@ binary.data.code.tex))
 util.verb.code.tex)
 (C:\Users\Nikolai\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\libs\pgflibra
 rypgfplots.surfshading.code.tex
-\c@pgfplotslibrarysurf@no=\count128
+\c@pgfplotslibrarysurf@no=\count129
 
 (C:\Users\Nikolai\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\sys\pgflibrar
 ypgfplots.surfshading.pgfsys-pdftex.def)))
@@ -607,7 +611,7 @@ ecorations.code.tex
 \pgfdecoratedinputsegmentcompleteddistance=\dimen171
 \pgfdecoratedinputsegmentremainingdistance=\dimen172
 \pgf@decorate@distancetomove=\dimen173
-\pgf@decorate@repeatstate=\count129
+\pgf@decorate@repeatstate=\count130
 \pgfdecorationsegmentamplitude=\dimen174
 \pgfdecorationsegmentlength=\dimen175
 )
@@ -621,7 +625,7 @@ ons\pgflibrarydecorations.pathmorphing.code.tex))
 \libraries\tikzlibrarydecorations.pathreplacing.code.tex
 (C:\Users\Nikolai\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\libraries\decorati
 ons\pgflibrarydecorations.pathreplacing.code.tex))
-\pgfplots@numplots=\count130
+\pgfplots@numplots=\count131
 \pgfplots@xmin@reg=\dimen176
 \pgfplots@xmax@reg=\dimen177
 \pgfplots@ymin@reg=\dimen178
@@ -639,14 +643,14 @@ File: pgflibraryplotmarks.code.tex 2015/08/03 v3.0.1a (rcs-revision 1.14)
 )))
 ("C:\Program Files\MiKTeX 2.9\tex\latex\tools\multicol.sty"
 Package: multicol 2017/04/11 v1.8q multicolumn formatting (FMi)
-\c@tracingmulticols=\count131
+\c@tracingmulticols=\count132
 \mult@box=\box42
 \multicol@leftmargin=\dimen182
-\c@unbalance=\count132
-\c@collectmore=\count133
-\doublecol@number=\count134
-\multicoltolerance=\count135
-\multicolpretolerance=\count136
+\c@unbalance=\count133
+\c@collectmore=\count134
+\doublecol@number=\count135
+\multicoltolerance=\count136
+\multicolpretolerance=\count137
 \full@width=\dimen183
 \page@free=\dimen184
 \premulticols=\dimen185
@@ -677,30 +681,30 @@ Package: multicol 2017/04/11 v1.8q multicolumn formatting (FMi)
 \@tempa=\box63
 \@tempa=\box64
 \@tempa=\box65
-\c@columnbadness=\count137
-\c@finalcolumnbadness=\count138
+\c@columnbadness=\count138
+\c@finalcolumnbadness=\count139
 \last@try=\dimen188
 \multicolovershoot=\dimen189
 \multicolundershoot=\dimen190
 \mult@nat@firstbox=\box66
 \colbreak@box=\box67
-\mc@col@check@num=\count139
+\mc@col@check@num=\count140
 )
 (GuideToCalculus.aux)
 \openout1 = `GuideToCalculus.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -738,16 +742,16 @@ LaTeX Font Info:    ... okay on input line 18.
 
 (C:\Users\Nikolai\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count140
+\scratchcounter=\count141
 \scratchdimen=\dimen191
 \scratchbox=\box68
-\nofMPsegments=\count141
-\nofMParguments=\count142
+\nofMPsegments=\count142
+\nofMParguments=\count143
 \everyMPshowfont=\toks46
-\MPscratchCnt=\count143
+\MPscratchCnt=\count144
 \MPscratchDim=\dimen192
-\MPnumerator=\count144
-\makeMPintoPDFobject=\count145
+\MPnumerator=\count145
+\makeMPintoPDFobject=\count146
 \everyMPtoPDFconversion=\toks47
 ) ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
 Package: pdftexcmds 2017/03/19 v0.25 Utility functions of pdfTeX for LuaTeX (HO
@@ -792,16 +796,16 @@ G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 )
 ABD: EverySelectfont initializing macros
-LaTeX Info: Redefining \selectfont on input line 18.
+LaTeX Info: Redefining \selectfont on input line 19.
  ABD: EveryShipout initializing macros
 Package pgfplots notification 'compat/show suggested version=true': you might b
 enefit from \pgfplotsset{compat=1.15} (current compat level: 1.5).
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 26.
+LaTeX Font Info:    Try loading font information for U+msa on input line 86.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 26.
+LaTeX Font Info:    Try loading font information for U+msb on input line 86.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -812,120 +816,141 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \openout4 = `GuideToCalculus.toc'.
 
  [2]
-Underfull \hbox (badness 10000) in paragraph at lines 33--38
+Underfull \hbox (badness 10000) in paragraph at lines 93--98
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 33--38
+Underfull \hbox (badness 10000) in paragraph at lines 93--98
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 40--43
+Underfull \hbox (badness 10000) in paragraph at lines 100--103
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 45--48
+Underfull \hbox (badness 10000) in paragraph at lines 105--108
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 50--54
+Underfull \hbox (badness 10000) in paragraph at lines 110--114
 
  []
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 68--72
+Underfull \hbox (badness 10000) in paragraph at lines 128--132
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 75--78
+Underfull \hbox (badness 10000) in paragraph at lines 135--138
 
  []
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 98--101
+Underfull \hbox (badness 10000) in paragraph at lines 158--161
 
  []
 
 [5] [6]
-Underfull \hbox (badness 10000) in paragraph at lines 117--119
+Underfull \hbox (badness 10000) in paragraph at lines 177--179
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 136--141
+Underfull \hbox (badness 10000) in paragraph at lines 196--200
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 136--141
+Underfull \hbox (badness 10000) in paragraph at lines 196--200
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 136--141
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 136--141
+Underfull \hbox (badness 10000) in paragraph at lines 196--200
 
  []
 
 [7]
-Underfull \hbox (badness 10000) in paragraph at lines 149--154
+Underfull \hbox (badness 10000) in paragraph at lines 208--213
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 149--154
+Underfull \hbox (badness 10000) in paragraph at lines 208--213
 
  []
 
 [8] [9] [10]
-Underfull \hbox (badness 10000) in paragraph at lines 206--208
+Underfull \hbox (badness 10000) in paragraph at lines 265--267
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 265--267
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 265--267
+
+ []
+
+Missing character: There is no ; in font nullfont!
+
+Underfull \hbox (badness 10000) in paragraph at lines 298--300
 
  []
 
 [11]
-Underfull \hbox (badness 10000) in paragraph at lines 245--248
+Underfull \hbox (badness 10000) in paragraph at lines 324--326
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 250--253
+Underfull \hbox (badness 10000) in paragraph at lines 324--326
 
  []
 
-[12] [13] <Images/AreaUnderCurve.png, id=60, 1066.7353pt x 545.03625pt>
+[12]
+Underfull \hbox (badness 10000) in paragraph at lines 333--336
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 338--341
+
+ []
+
+[13] [14] <Images/AreaUnderCurve.png, id=63, 1066.7353pt x 545.03625pt>
 File: Images/AreaUnderCurve.png Graphic file (type png)
 
 <use Images/AreaUnderCurve.png>
-Package pdftex.def Info: Images/AreaUnderCurve.png used on input line 290.
+Package pdftex.def Info: Images/AreaUnderCurve.png used on input line 378.
 (pdftex.def)             Requested size: 542.02501pt x 276.9502pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 288--292
+Underfull \hbox (badness 10000) in paragraph at lines 376--380
 
  []
 
-[14 <./Images/AreaUnderCurve.png>]
-Overfull \hbox (18.76573pt too wide) in paragraph at lines 399--399
+[15 <./Images/AreaUnderCurve.png>]
+Overfull \hbox (18.76573pt too wide) in paragraph at lines 487--487
 [] 
  []
 
-[15] [16] [17] [18] [19] (GuideToCalculus.aux) ) 
+[16] [17] [18] [19] [20] (GuideToCalculus.aux) ) 
 Here is how much of TeX's memory you used:
- 23563 strings out of 493323
- 604309 string characters out of 3139061
- 832581 words of memory out of 3000000
- 26684 multiletter control sequences out of 15000+200000
+ 23889 strings out of 493323
+ 608297 string characters out of 3139061
+ 840232 words of memory out of 3000000
+ 27006 multiletter control sequences out of 15000+200000
  13888 words of font info for 53 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 69i,17n,96p,885b,1855s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 69i,17n,96p,885b,1867s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/fo
 nts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
 1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
@@ -941,9 +966,9 @@ sfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
 m/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.
 pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msam10.pfb
 >
-Output written on GuideToCalculus.pdf (19 pages, 263375 bytes).
+Output written on GuideToCalculus.pdf (20 pages, 266613 bytes).
 PDF statistics:
- 130 PDF objects out of 1000 (max. 8388607)
+ 133 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  18 words of extra memory for PDF output out of 10000 (max. 10000000)
 
