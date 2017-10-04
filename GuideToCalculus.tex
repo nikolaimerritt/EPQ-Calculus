@@ -378,7 +378,7 @@ Now that we've looked at the most important rule in calculus, it makes to look a
 %
 \newpage
 \subsection{Applying what we've learned}
-Now that we've established these two cornerstones of Calculus, we can do a lot from these. To demonstrate, let's find the derivative of $\ln x$ . 
+Now that we've established these two cornerstones of Calculus, we can do a lot from these. To demonstrate, let's find the derivative of $\log_e x$, more commonly written as $\ln x$ . 
 \begin{flalign*}
 	\text{Let } y &= \ln x \nn
 	 e^y &= x \nn
@@ -395,9 +395,24 @@ Using this method of rearranging for $\Deriv{y}{x}$, we can work out a lot more 
 \newpage
 \begin{flalign}
 	\intertext{Using logarithm rules, prove that}
-	\Deriv{(f \cdot g)}{x} &= f\Deriv{g}{x} + g  \Deriv{f}{g} \ \text{ for any functions $f(x)$ and $g(x)$. } 
+	\Deriv{(f \cdot g)}{x} &= f\Deriv{g}{x} + g  \Deriv{f}{g} \ \text{ for any functions $f(x)$ and $g(x)$ , $f(x)$ and $g(x) \ne 0$} 
 	\intertext{Hence, or otherwise, prove that }
-	\Deriv{\left( \frac{f}{g} \right)}{x} &= \frac{g  \, \Deriv{f}{x} - f  \, \Deriv{g}{x}}{g^2} \ \text{ for any functions $f(x)$ and $g(x)$.}
+	\Deriv{\left( \frac{f}{g} \right)}{x} &= \frac{g  \, \Deriv{f}{x} - f  \, \Deriv{g}{x}}{g^2} \ \text{ for any functions $f(x)$ and $g(x)$ , $f(x)$ and $g(x) \ne 0$} 
+	\intertext{Prove that these identities also hold when $f(x) = 0$ for both, and $g(x) = 0$ for (2.15)}
+	\intertext{Hence find the derivatives of the following functions: }
+	& (3x^3 - 5x)^9 \, (2x+5)^7 \nn
+	& \frac{1 - 2x^2}{4x^3 - 2x} \nn 
+	& \left[ \frac{(3x + 1)^4 \, (12x - 3)}{4x^3} \right]^5 \nn
+	\intertext{Prove that}
+	x^n &= e^{n \, \ln x} \ \text{ for all real $n$, real $x \ne 0$} \fs
+	\intertext{Hence (finally!) prove that}
+	\Deriv{(x^n)}{x} &= n \, x^{n - 1} \ \text{ for all real $n$, $x$} \fs \nn
+	\intertext{Prove the following miscellaneous identities:}	
+	\Deriv{(k^x)}{x} &= k^x \ln k , \ k \ne 0 \nn
+	\NthDeriv{(k^x)}{x}{n} &= k^x \ln^n k , \ k \ne 0 \nn
+	\Deriv{(\log_k x)}{x} &= \frac{1}{x \ln k} , \ x, k \ne 0 \nn
+	\Deriv{(x^x)}{x} &= x^x \, (\ln x + 1) , \ x \ne 0 \nn
+	\Deriv{(\log_x k)}{x} &= - \frac{\ln k}{x \, \ln^2 x} , \ x, k \ne 0
 \end{flalign}
 \newpage
 \section{The Integral: an integral part of Calculus}

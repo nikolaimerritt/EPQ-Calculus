@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.9.5)  4 OCT 2017 23:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.9.5)  5 OCT 2017 00:05
 entering extended mode
 **./GuideToCalculus.tex
 (GuideToCalculus.tex
@@ -908,12 +908,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 350--352
  []
 
 [14] [15] [16] [17]
-Underfull \hbox (badness 10000) in paragraph at lines 408--411
+Underfull \hbox (badness 10000) in paragraph at lines 423--426
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 413--416
+Underfull \hbox (badness 10000) in paragraph at lines 428--431
 
  []
 
@@ -921,15 +921,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 413--416
 File: Images/AreaUnderCurve.png Graphic file (type png)
 
 <use Images/AreaUnderCurve.png>
-Package pdftex.def Info: Images/AreaUnderCurve.png used on input line 453.
+Package pdftex.def Info: Images/AreaUnderCurve.png used on input line 468.
 (pdftex.def)             Requested size: 542.02501pt x 276.9502pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 451--455
+Underfull \hbox (badness 10000) in paragraph at lines 466--470
 
  []
 
 [20 <./Images/AreaUnderCurve.png>]
-Overfull \hbox (31.53748pt too wide) in paragraph at lines 584--584
+Overfull \hbox (31.53748pt too wide) in paragraph at lines 599--599
 [] 
  []
 
@@ -937,7 +937,7 @@ Overfull \hbox (31.53748pt too wide) in paragraph at lines 584--584
 Here is how much of TeX's memory you used:
  23897 strings out of 493323
  608386 string characters out of 3139061
- 848232 words of memory out of 3000000
+ 848230 words of memory out of 3000000
  27011 multiletter control sequences out of 15000+200000
  15394 words of font info for 58 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -958,7 +958,7 @@ ts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
 sy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb>
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmu10.pfb><C:/Progr
 am Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on GuideToCalculus.pdf (26 pages, 298571 bytes).
+Output written on GuideToCalculus.pdf (26 pages, 300846 bytes).
 PDF statistics:
  160 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
