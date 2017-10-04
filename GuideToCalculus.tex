@@ -260,11 +260,10 @@ And there we have it. A general-use formula for the family's velocity at any min
 	\NthDeriv{(x^3 + 2x^2 + 3x + 1)}{x}{2} \nn
 	\NthDeriv{(3z^4 + 2z^3 + 3z)}{z}{2}
 \end{flalign}
-\newpage
-\subsection{The chain rule: the mother of all rules}
-Before we can proceed any further with derivatives, we must first understand the chain rule. It forms the foundation of so many things: finding derivatives of nested functions, integration by u-substitution, implicit differentiation, solving differential equations, parametric differentiation, and the list goes on... With something so useful, you'd think it's incredibly complicated, but that couldn't be further than the truth. \nn
-First off, let's look at a slightly different way to define a derivative. As with our last way, we start by considering two points along the x-axis, which we shall call $x$ and $p$. Visually, we have: \nn 
-
+% \newpage
+% \subsection{The chain rule: the mother of all rules}
+Before we can proceed any further with derivatives, we must first understand the chain rule. It forms the foundation of so many things: finding derivatives of nested functions, integration by u-substitution, implicit differentiation, solving differential equations, parametric differentiation, and the list goes on... With something so useful, you'd think it's incredibly complicated, but that couldn't be further than the truth. \\ \\
+First off, let's look at a slightly different way to define a derivative. As with our last way, we start by considering two points along the x-axis, which we shall call $x$ and $p$. Visually, we have: \\ \\
 \begin{tikzpicture}
 	\begin{axis} [
 		axis lines = left,
@@ -295,9 +294,9 @@ First off, let's look at a slightly different way to define a derivative. As wit
 	at (axis cs: 15, 3) {};
 	\draw [<->, color = magenta](axis cs: 10.5, 90) -- node[above] {$\Delta x$} (axis cs: 14.5, 90);
 	\end{axis}
-\end{tikzpicture} \nn
+\end{tikzpicture} \\ \\
 Traditionally, we'd let their distance, $\Delta x$, go to 0. But clearly, saying ``let's the distance between $x$ and $p$ go to 0" is the same thing as saying ``let $x$ get closer and closer to $p$". So we have two identical ways of writing a derivative: 
-\begin{flalign}
+\begin{flalign*}
 	 \Deriv{y}{x} &\equiv \LimDeriv{y}{x}  \nn
 	\intertext{and }   
 	\Deriv{y}{x} &\equiv \lim_{x \to p} \frac{y(x) - y(p)}{x - p} \fs  
@@ -326,10 +325,80 @@ Traditionally, we'd let their distance, $\Delta x$, go to 0. But clearly, saying
 	\intertext{Because both are zero,}
 	\Deriv{z}{x} &= \text{whatever we want} \times \Deriv{y}{x} \fs \nn
 	\intertext{Now, it'd be a nightmare if we had to use two different formulas for whether our the region around our functions is flat or not. We'd have to either draw the graphs out, or (ironically) use derivatives to check. And for what purpose? If it doesn't matter what we choose to have in the middle anyway, why not just make life easier for us? So, no matter what, we use one standard formula:}
-	\Deriv{z}{x} &= \Deriv{z}{y} \, \Deriv{y}{x} \fs
+	\Deriv{z}{x} &= \Deriv{z}{y} \, \Deriv{y}{x} \fs \nn
+	\intertext{Now for some examples. Let's say we wanted to differentiate $(x^2 + 3x + 5)^7 $. Instead of expanding this out manually, which would be such a nasty process, we can do the following by the chain rule:}	
+	\text{Let } \ y(x) &= x^2 + 3x + 5 \ \text{ and } z(y) = y^7 \nn
+	\text{such that } z(y(x)) &= (x^2 + 3x + 5)^7 \fs \nn	
+	\Deriv{z}{x} &= \Deriv{z}{y} \cdot \Deriv{y}{x} \nn
+	&= 7y^6 \cdot (2x + 3) \nn
+	&= 7 \, (2x + 3) \, (x^2 + 3x + 5)^6 \fs 
+	\intertext{Once we're confident with this process, we could write this more succintly by omitting the $z$ and $y$. For instance,}
+	\Deriv{[(x^2 + 3x + 5)^7]}{x} &= \Deriv{[(x^2 + 3x + 5)^7]}{(x^2 + 3x + 5)} \cdot \Deriv{(x^2 + 3x + 5)}{x} \nn
+	&= 7 \, (x^2 + 3x + 5)^6 \cdot (2x + 3) \nn
+	\intertext{So easy, isn't it? So much better than expanding the brackets and doing it manually. \newline
+	This is just the first of the many uses for the chain rule. We'll discover more as we go along, but for now, it'd be good to pause and do a few practice questions.}
+\end{flalign*}
+Differentiate the following expressions (with respect to $x$):
+\begin{flalign}
+	(x^3 + 3x^2 + 4)^9 & \nn
+	(3x^4 - 11x)^{31} & \nn
+	(12x^9 + 12x^8)^3 & \nn
+	\left[x \, (x + 1 ) \, (x-1)\right]^4 &
 \end{flalign}
-\nn
-
+\newpage
+\subsection{Euler's number}
+Now that we've looked at the most important rule in calculus, it makes to look at the most important number next. This number, $e$, is probably the second most-used constant after $\pi$, and equally as useful. 
+\\ \\ To understand what $e$ is, let's imagine you were trying to choose a bank to deposit money into. Bank A gives you a huge 100\% interest at the end of the year. Bank B gives 50\% interest halfway through the year, and then another 50\% interest on your current amount at the end. Bank C gives you $\frac{1}{3}$ rd interest four months in, then another third four months after, and the same at the end of the year. And bank D gives you 25\% compound interest once every three months. Which one should you go for? Well, let's work it out:
+\begin{flalign*}
+	\text{\textbf{A: } \pounds 1 in } &\to \text{\pounds} 1 \times 2 = \text{ \pounds 2 out.} \\
+	\text{\textbf{B: } \pounds 1 in } &\to \text{\pounds} 1 \times 1.5 \times 1.5 = \text{\pounds 2.50 out.} \\
+	\text{\textbf{C: } \pounds 1 in } &\to \text{\pounds} 1 \times 1.333 \times 1.333 \times 1.333 = \text{\pounds 2.37 out.} \\
+	\text{\textbf{D: } \pounds 1 in } &\to \text{\pounds} 1 \times 1.25 \times 1.25 \times 1.25 \times 1.25 = \text{\pounds 2.44 out.}
+	\intertext{So, we can clearly see that the more times we receive compound interest, the more money we get, despite the interest rate itself getting smaller. If we wanted to find how much money a bank would give us with $n$ repeats every year, we can see our formula would be}
+	\text{\pounds 1 in } &\to \text{\pounds 1} \times \left( 1 + \frac{1}{n} \right)^n \text{ out.} \nn	
+	\intertext{Now we know this, what's the most amount of money we could possibly get? What if we didn't get interest once every three months, but once every three minutes, or every three seconds? It's tempting to say infinity, but notice how the extra money gets less and less with each bank. B gives us an extra 50p, but C only gives us 27p more than the one before it, and D gives us even less of an increase than that. Notice how what we're really asking is to find}
+	& \lim_{n \to \infty} \left[ \left( 1 + \frac{1}{n} \right)^n \right] \fs 
+	%
+	\intertext{In reality, this is just under \pounds 2.72 -- which you can check easily for yourself by plugging in a massive number for $n$. This value -- the largest possible gain per pound from compound interest -- is called Euler's number, or $e$ for short. This number is at the root of growth and change, and being something so fundamental, crops up in weird and wonderful places all across the mathematical landscape. But what we're interested in here is what happens when you raise $e$ to a power $x$. Or, more precisely, the derivative of such a function. We'll notice that, like the chain rule, we'll get a surprisingly nice result when we find it.}
+	\Deriv{(e^x)}{x} &= \lim_{h \to 0} \frac{e^{x + h} - e^x}{h} \nn
+	&= \lim_{h \to 0} \frac{e^x \, (e^h - 1)}{h} \nn
+	&= \lim_{h \to 0} \left( e^x \right) \cdot \lim_{h \to 0} \left( \frac{e^h - 1}{h} \right) \nn
+	&= e^x \, \lim_{h \to 0} \frac{e^h - 1}{h}
+	\intertext{Now to put our definition of $e$ in}
+	\Deriv{(e^x)}{x} &= e^x \, \lim_{ \substack{h \to 0 \\ n \to \infty} } \frac{\left( 1 + \frac{1}{n} \right)^{n \, h} - 1}{h}
+	\intertext{Observe that}
+	\lim_{n \to \infty} \frac{1}{n}	&= \lim_{h \to 0} h = 0
+	\intertext{So $\frac{1}{n}$ and $h$ are equivalent in our limit. And that makes intuitive sense; as n gets larger and larger, $\frac{1}{n}$ will get closer and closer to 0, just like $h$ .}
+	\Rightarrow \Deriv{(e^x)}{x} &= \lim_{n \to \infty} \frac{ \left( 1 + \frac{1}{n} \right)^{\frac{n}{n}} - 1}{\frac{1}{n}} \nn
+	&= e^x \, \lim_{n \to \infty} \frac{1 + \frac{1}{n} - 1}{\frac{1}{n}} \nn
+	&= e^x \, \lim_{n \to \infty} 1 \nn
+	&= e^x \fs
+	\intertext{So, the rate of change in $e^x$ is $e^x$ -- it's completely unaffected by differentiation. You couldn't ask for a nicer answer. This makes $e$ an amazing bedrock to build up from when doing Calculus. If you build on nicer values, you'll inevitably get nicer values in return. }
+\end{flalign*}
+%
+\newpage
+\subsection{Applying what we've learned}
+Now that we've established these two cornerstones of Calculus, we can do a lot from these. To demonstrate, let's find the derivative of $\ln x$ . 
+\begin{flalign*}
+	\text{Let } y &= \ln x \nn
+	 e^y &= x \nn
+	\Deriv{(e^y)}{x} &= \Deriv{x}{x} \ = 1\nn
+	\intertext{How frustrating! We've got $e$ involved, and the whole thing equals 1. But we can't differentiate the left hand side as it is, because $x$ and $y$ are two completely different things. Here's where the chain rule comes in:}	
+	\Deriv{(e^y)}{y} \ \Deriv{y}{x} &= 1  \fs \nn
+	\intertext{Now it's simply a case of getting $\Deriv{y}{x}$ on its own.}
+	e^y \ \Deriv{y}{x} &= 1 \nn
+	\Deriv{y}{x} &= \frac{1}{e^y} \fs \nn
+	\intertext{Remembering that $e^y = x$, we finally have}
+	\Deriv{y}{x} &= \frac{1}{x} \fs	
+\end{flalign*}
+Using this method of rearranging for $\Deriv{y}{x}$, we can work out a lot more identities. That, though, is for you to do.
+\newpage
+\begin{flalign}
+	\intertext{Using logarithm rules, prove that}
+	\Deriv{(f \cdot g)}{x} &= f\Deriv{g}{x} + g  \Deriv{f}{g} \ \text{ for any functions $f(x)$ and $g(x)$. } 
+	\intertext{Hence, or otherwise, prove that }
+	\Deriv{\left( \frac{f}{g} \right)}{x} &= \frac{g  \, \Deriv{f}{x} - f  \, \Deriv{g}{x}}{g^2} \ \text{ for any functions $f(x)$ and $g(x)$.}
+\end{flalign}
 \newpage
 \section{The Integral: an integral part of Calculus}
 \subsection{Going backwards: the antiderivative}
@@ -470,26 +539,48 @@ How could we go about finding the red area, between the points \(a\) and \(b\)?
 	\intertext{And by 2.2,}
 	\Deriv{\left(12x^3 + 3x^2\right)}{x} &= 12 \, \Deriv{(x^3)}{x} + 3 \, \Deriv{(x^2)}{x} \\ \\
 	&= 12 \cdot 3x^2 + 3 \cdot 2x \\ \\
-	&= 36x^2 + 6x
+	&= 36x^2 + 6x \fs 
 	%
 	\intertext{2.6}
 	\intertext{Similarly, }
-	\Deriv{\left(9y^2 - 2y^5 + 3y\right)}{y} &= 18y - 10y^4 + 3y^0 \\ \\
+	\Deriv{\left(9y^2 - 2y^5 + 3y\right)}{y} &= 18y - 10y^4 + 3y^0 \fs \\ \\
 	&= 18y - 10y^4 + 3
 	%
 	\intertext{2.7}
-	\Deriv{ \left(7u^3 + 3u^2 - 2u + 12\right)}{u} &= 21u^2 + 3u - 2 \\ \\
+	\Deriv{ \left(7u^3 + 3u^2 - 2u + 12\right)}{u} &= 21u^2 + 3u - 2 \fs\\ \\
 	%
 	\intertext{2.8}
-	\Deriv{\left( 8\phi^{12} + 3\phi^{10} + 9\phi^2 - 17 \right)}{\phi} &= 96\phi^{11} + 30\phi^9 + 18\phi
+	\Deriv{\left( 8\phi^{12} + 3\phi^{10} + 9\phi^2 - 17 \right)}{\phi} &= 96\phi^{11} + 30\phi^9 + 18\phi \fs
 	%
 	\intertext{2.9}
 	\NthDeriv{(x^3 + 2x^2 + 3x + 1)}{x}{2} &= \Deriv{(3x^2 + 4x + 3)}{x} \\ \\
-	&= 6x + 4
+	&= 6x + 4 \fs
 	%
 	\intertext{2.10}
 	\NthDeriv{(3z^4 + 2z^3 + 3z)}{z}{2} &= \Deriv{(12z^3 + 6z^2 + 3)}{z} \\ \\
-	&= 36z^2 + 12z 
-\end{flalign*}
+	&= 36z^2 + 12z \fs
+	%
+	\intertext{2.11}
+	\text{Let } y(x) &= x^3 + 3x^2 + 4 \ \text{ and } z(y) = y^9 \\ 
+	\text{such that } \ z(y(x)) &= (x^3 + 3x^2 + 4)^9 \nn
+	\Deriv{z}{x} &= \Deriv{z}{y} \cdot \Deriv{y}{x} \nn
+	&= 9y^8 \cdot (3x^2 + 6x) \nn
+	&= 27 x \, (x + 2) \, (x^3 + 3x^2 + 4)^8 \fs
+	%
+	\intertext{2.10}
+	\intertext{Similarly to 2.11, }
+	\Deriv{(3x^4 - 11x)^{31}}{x} &= \Deriv{(3x^4 - 11x)^{31}}{(3x^4 - 11x)} \cdot \Deriv{(3x^4 - 11x)}{x} \nn
+	&= 31 \, (3x^4 - 11x)^{30} \cdot (12x^3 - 11) \fs
+	%
+	\intertext{2.12}
+	\Deriv{(12x^9 + 12x^8)^3}{x} &= \Deriv{(12x^9 + 12x^8)^3}{(12x^9 + 12x^8)} \cdot \Deriv{(12x^9 + 12x^8)}{x} \nn
+	&= 3 \, (12x^9 + 12x^8)^2 \cdot (108x^8 + 96x^7) \nn
+	&= 324x^7 \, (12x^9 + 12x^8)^2 \, (12x + 1) \fs
+	%
+	\intertext{2.13}
+	\text{Observe that } x \, (x + 1 ) \, (x-1) &= x \, (x^2 - 1) \ = \ x^3 - x \nn
+	\therefore{} \Deriv{\left[x \, (x + 1 ) \, (x-1)\right]^4}{x} &= \Deriv{(x^3 - x)^4}{(x^3 - x)} \cdot \Deriv{(x^3 - x)}{x} \nn
+	&= 4 \, (x^3 - x)^3 \, (3x^2 - 1) \fs
+ \end{flalign*}
 \end{document}
 
