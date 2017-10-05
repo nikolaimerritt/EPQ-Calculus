@@ -1,7 +1,7 @@
 \documentclass[11pt, leqno]{article}
 \usepackage[margin=0.5in]{geometry}
 \usepackage[x11names]{xcolor}
-\usepackage{amsfonts,amsmath,amssymb,amsthm}
+\usepackage{amsfonts,amsmath,amssymb,amsthm, amstext, array}
 \usepackage{float}
 \usepackage{etoolbox}
 \usepackage{ragged2e}
@@ -17,62 +17,6 @@
 \graphicspath{{Images/}}
 
 \begin{document}
-
-\makeatletter
-\newif\if@gather@prefix 
-\preto\place@tag@gather{% 
-	\if@gather@prefix\iftagsleft@ 
-	\kern-\gdisplaywidth@ 
-	\rlap{\gather@prefix}% 
-	\kern\gdisplaywidth@ 
-	\fi\fi 
-} 
-\appto\place@tag@gather{% 
-	\if@gather@prefix\iftagsleft@\else 
-	\kern-\displaywidth 
-	\rlap{\gather@prefix}% 
-	\kern\displaywidth 
-	\fi\fi 
-	\global\@gather@prefixfalse 
-} 
-\preto\place@tag{% 
-	\if@gather@prefix\iftagsleft@ 
-	\kern-\gdisplaywidth@ 
-	\rlap{\gather@prefix}% 
-	\kern\displaywidth@ 
-	\fi\fi 
-} 
-\appto\place@tag{% 
-	\if@gather@prefix\iftagsleft@\else 
-	\kern-\displaywidth 
-	\rlap{\gather@prefix}% 
-	\kern\displaywidth 
-	\fi\fi 
-	\global\@gather@prefixfalse 
-} 
-\def\math@cr@@@align{%
-	\ifst@rred\nonumber\fi
-	\if@eqnsw \global\tag@true \fi
-	\global\advance\row@\@ne
-	\add@amps\maxfields@
-	\omit
-	\kern-\alignsep@
-	\if@gather@prefix\tag@true\fi
-	\iftag@
-	\setboxz@h{\@lign\strut@{\make@display@tag}}%
-	\place@tag
-	\fi
-	\ifst@rred\else\global\@eqnswtrue\fi
-	\global\lineht@\z@
-	\cr
-}
-\newcommand*{\beforetext}[1]{% 
-	\ifmeasuring@\else
-	\gdef\gather@prefix{#1}% 
-	\global\@gather@prefixtrue 
-	\fi
-} 
-\makeatother	
 	
 \newcommand{\Diff}[1] {\mathop{\text{d}#1}}
 \newcommand{\Deriv}[2] {\frac{ \Diff{#1} }{ \Diff{#2} }}
@@ -83,6 +27,7 @@
 \newcommand{\asreq}{\textrm{, as required.} \qed}
 \newcommand{\fs}{\, .}
 \newcommand{\nn}{\\ \nonumber \\}
+\newcolumntype{C}{>{$}c<{$}}
 \maketitle
 
 \newpage
@@ -144,8 +89,8 @@ However, we can still offer Jim an incredibly good estimate to how much the Tham
 \end{flalign*}
 \\ With these four properties made clear, we can easily start to demonstrate how we could work out the limit for our water level equation algebraically:
 \begin{align*}
-\lim_{t \to 12} \frac{(t + 5) \ (t - 12)}{t - 12} &= \lim_{t \to 12} \left( \frac{t - 12}{t - 12} \ (t + 5) \right) \\ \\
- &= \lim_{t \to 12} \left(\frac{t - 12}{t - 12}\right) \times \lim_{t \to 12} (t + 5).
+	\lim_{t \to 12} \frac{(t + 5) \ (t - 12)}{t - 12} &= \lim_{t \to 12} \left( \frac{t - 12}{t - 12} \ (t + 5) \right) \\ \\
+	&= \lim_{t \to 12} \left(\frac{t - 12}{t - 12}\right) \times \lim_{t \to 12} (t + 5).
 \end{align*}
 \\ Note that we're taking the limit as \(t\) approaches 12. Similar to our estimation in the mystery connection loss in our basketball scenario, we see what happens as \(t\) \textit{approaches} 12, not when \(t\) \textit{is} 12 So, cancelling both sides of the fraction won't be dividing by zero. This means:
 \begin{align*}
@@ -161,14 +106,14 @@ Great! Now we've reduced it to a simple common-sense question. Our first limit o
 \newpage
 Prove the following propositions:
 \begin{flalign}
-	\lim_{x \to -2} \left(12x^2 + 5 \right) &= 53 \nn
-	\lim_{x \to a} \frac{(x + 3) \ (x - a)}{x - a} &= a + 3 \nn
-	\lim_{x \to -2} \left( 12 \, \frac{x^2 - 4}{x + 2} \right) &= -48 \nn
-	\lim_{h \to 0} \frac{(6 + h)^2 - 36}{h} &= 12 \nn
-	\lim_{h \to 0} \ \frac{x}{3-\sqrt{x+9}} &= -6 \nn
-	\lim_{U \to 0} \frac{1- \sqrt{1-U^2}}{U} &= 0 \nn
-	\lim_{\alpha \to 0} \frac{1- \sqrt{1-\alpha^3}}{\alpha^3} &= \frac{1}{2} \nn
-	\lim_{\psi \to 0} \frac{\sqrt{a + \psi} - \sqrt{a}}{\psi} &= \frac{\sqrt{a}}{2a} 
+\lim_{x \to -2} \left(12x^2 + 5 \right) &= 53 \nn
+\lim_{x \to a} \frac{(x + 3) \ (x - a)}{x - a} &= a + 3 \nn
+\lim_{x \to -2} \left( 12 \, \frac{x^2 - 4}{x + 2} \right) &= -48 \nn
+\lim_{h \to 0} \frac{(6 + h)^2 - 36}{h} &= 12 \nn
+\lim_{h \to 0} \ \frac{x}{3-\sqrt{x+9}} &= -6 \nn
+\lim_{U \to 0} \frac{1- \sqrt{1-U^2}}{U} &= 0 \nn
+\lim_{\alpha \to 0} \frac{1- \sqrt{1-\alpha^3}}{\alpha^3} &= \frac{1}{2} \nn
+\lim_{\psi \to 0} \frac{\sqrt{a + \psi} - \sqrt{a}}{\psi} &= \frac{\sqrt{a}}{2a} 
 \end{flalign}
 
 \newpage
@@ -177,139 +122,139 @@ Prove the following propositions:
 It's often very useful to know the rate of change of something. An obvious example is velocity; without being able to how fast an object is going -- or, in other words, the rate of change of its distance vs time -- we'd all die in car crashes on our first day of driving. And there are many more examples: how fast diseases spread, the ebb and flow of the stock market, and the growth of populations, to name a few. However, the first example is probably the simplest.
 \\ \\ Let's picture a scenario to demonstrate this. Imagine the Leibniz family is going to England on holiday. Arriving at Heathrow airport, they take a taxi to their hotel in central London -- a 20 minute journey. Their taxi driver is driving quite erratically to beat the London traffic. So it so happens that their distance in metres from Heathrow, \(s\), in terms of time passed in minutes, \(t\), is
 \begin{flalign*}
-	s(t) &= t^2 \ \text{ when } 0 \leq t \leq 20.
+s(t) &= t^2 \ \text{ when } 0 \leq t \leq 20.
 \end{flalign*}
 Given this, it's very easy to find their average velocity across any section of their journey. Say we wanted to find their average velocity for the last 15 minutes. We know that 
 \begin{flalign*}
-	\text{avg velocity} &= \DelFrac{s}{t} = \frac{\text{new dist} - \text{old dist}}{\text{new time} - \text{old time}} \fs \\ \\
-	\intertext{By convention, let's refer to the starting time as \(t\) and our change in time as \(\Delta t\) \newline So, we have:} &
-	\begin{array} {l l l}
-		\text{old time} = t & \Rightarrow & \text{old dist} = t^2 \\
-		\text{new time} = t + \Delta t & \Rightarrow & \text{new dist} = (t + \Delta t)^2
-	\end{array}
-	\intertext{So, using this,}
-	\text{avg velocity} &= \frac{(t + \Delta t)^2 - t^2}{\Delta t} \\
-	\intertext{Using \(t = 5\) and \(\Delta t = 15\), we get:}
-	\text{avg velocity} &= \frac{(5 + 15)^2 - 5^2}{15} \\ \\
-	&= \frac{375}{15} \\ \\
-	&= 25 \fs
+\text{avg velocity} &= \DelFrac{s}{t} = \frac{\text{new dist} - \text{old dist}}{\text{new time} - \text{old time}} \fs \\ \\
+\intertext{By convention, let's refer to the starting time as \(t\) and our change in time as \(\Delta t\) \newline So, we have:} &
+\begin{array} {l l l}
+\text{old time} = t & \Rightarrow & \text{old dist} = t^2 \\
+\text{new time} = t + \Delta t & \Rightarrow & \text{new dist} = (t + \Delta t)^2
+\end{array}
+\intertext{So, using this,}
+\text{avg velocity} &= \frac{(t + \Delta t)^2 - t^2}{\Delta t} \\
+\intertext{Using \(t = 5\) and \(\Delta t = 15\), we get:}
+\text{avg velocity} &= \frac{(5 + 15)^2 - 5^2}{15} \\ \\
+&= \frac{375}{15} \\ \\
+&= 25 \fs
 \end{flalign*}
 \\ \\However in reality, we rarely care about someone's average velocity across a time period. It's far more common that we want to find the velocity \textbf{now}, at a single point in time. In other words, when there is no change in time. When \(\Delta t = 0\). 
 \\ \\ Unfortunately, we can't just plug in 0 for \(\Delta t\) and read off our answer. That would mean dividing by 0, and no one knows how to work out an answer that way. Instead, as with our previous problem, our only option is to use the method of limits and see what value our velocity approaches as we let \(\Delta t\) approach 0. 
 \\ \\ Let's give a name to our velocity at a single point. We'll call this $\Deriv{s}{t} \fs$ Now, using our limit definition, we have:
 \begin{flalign*}
-	\Deriv{s}{t} &= \lim_{\Delta t \to 0} \DelFrac{s}{t} \\ \\
-	&= \lim_{\Delta t \to 0} \frac{(t + \Delta t)^2 - t^2}{\Delta t} \\ \\
-	&= \lim_{\Delta t \to 0} \frac{t^2 + 2t \, \Delta t + (\Delta t)^2 - t^2}{\Delta t} \\ \\
-	&= \lim_{\Delta t \to 0} \frac{2t \, \Delta t + (\Delta t)^2}{\Delta t} \fs
-	\intertext{Again, because \(\Delta t\) \textit{approaches} 0, not \textit{equals} 0, we can divide both sides by \(\Delta t\) just fine. So we have:}
-	\Deriv{s}{t} &= \lim_{\Delta t \to 0} \left(2t + \Delta t \right) \\ \\
-	&= 2t \, , \text{ by common sense.}
+\Deriv{s}{t} &= \lim_{\Delta t \to 0} \DelFrac{s}{t} \\ \\
+&= \lim_{\Delta t \to 0} \frac{(t + \Delta t)^2 - t^2}{\Delta t} \\ \\
+&= \lim_{\Delta t \to 0} \frac{t^2 + 2t \, \Delta t + (\Delta t)^2 - t^2}{\Delta t} \\ \\
+&= \lim_{\Delta t \to 0} \frac{2t \, \Delta t + (\Delta t)^2}{\Delta t} \fs
+\intertext{Again, because \(\Delta t\) \textit{approaches} 0, not \textit{equals} 0, we can divide both sides by \(\Delta t\) just fine. So we have:}
+\Deriv{s}{t} &= \lim_{\Delta t \to 0} \left(2t + \Delta t \right) \\ \\
+&= 2t \, , \text{ by common sense.}
 \end{flalign*}
 And there we have it. A general-use formula for the family's velocity at any minute \(t\). Of course, \(\Deriv{s}{t} = 2t\) only when \(s(t) = t^2\). But this limit method could be used to find the rate of change of any function. 
 \\ \\Now for some jargon. Our instant rate of change in $s$, $\Deriv{s}{t}$ is called the derivative of $s$. And the method we just used to find it, by dealing with tiny differences in $s$ and $t$, is called differentiation. Note that $\Deriv{s}{t}$ is \textbf{not} actually a fraction. It's the \textbf{limit} of a fraction, yes, but $\Diff{s}$ and $\Diff{t}$ don't make any sense by themselves. For reasons we'll see later on, it's useful to write derivatives the same way we write fractions. But that's as far as it goes.
 %
 \\ \\ Now that we have found out that every \footnotemark function has a derivative, let's investigate this further. Patterns come up in all sorts of surprising places in maths, and fortunately, there's a pattern for the derivative of polynomials. To observe this, let's collect some information -- starting with \(x^3\)...
 \begin{flalign*}
-	\Deriv{(x^3)}{x} &= \lim_{\Delta x \to 0} \DelFrac{(x^3)}{x} \\ \\
-	&= \lim_{\Delta x \to 0} \frac{(x + \Delta x)^3 - x^3}{\Delta x} \\ \\
-	&= \lim_{\Delta x \to 0} \frac{x^3 + 3x^2 \, \Delta x + 3x (\Delta x)^2  + (\Delta x)^3 - x^3}{\Delta x} \\ \\
-	&= \lim_{\Delta x \to 0} \frac{3x^2 \, \Delta x + 3x (\Delta x)^2 + (\Delta x)^3}{\Delta x} \\ \\
-	&= \lim_{\Delta x \to 0} \left[ 3x^2 + 3x \, \Delta x + (\Delta x)^2 \right] \fs
-	\intertext{Now we have reduced it to a common sense level. As \(\Delta x\) gets closer and closer to 0, the \(3x \, \Delta x\) and \((\Delta x)^2 \) terms will get closer and closer to 0 too. So, we finally have, }
-	\Deriv{(x^3)}{x} &= 3x^2 \fs
-	\intertext{Through the same process, which I have hidden for brevity, we can arrive at}
-	\Deriv{(x^4)}{x} &= 4x^3
-	\intertext{and}
-	\Deriv{(x^5)}{x} &= 5x^4 \fs
-	%
-	\intertext{That should be enough information. Now let's lay present our findings.}
-	& \def\arraystretch{1.5}
-	\begin{array} {|l | l l|}
-		\hline
-		f(x) & & \Deriv{f}{x} \\ \hline \hline
-		x^2 & & 2x^1 \\ \hline
-		x^3 & & 3x^2 \\ \hline
-		x^4 & & 4x^3 \\ \hline
-		x^5 & & 5x^4 \\ \hline
-	\end{array}
-	\intertext{As we can see, the derivative of a power function seems to be the function multiplied by its power, then its own power is reduced by 1. Or, in mathematical notation, }
-	\Deriv{(x^n)}{x} &\equiv nx^{n-1} \ \ \text{for any } n \fs
-	\intertext{Notice how I showed this through a pattern, not by proving it. That's because proving it for any natural \(n\) is easy enough for you to do it! And as for \textbf{any} \(n\), it's definitely possible, but only by techniques in the next section. }
+\Deriv{(x^3)}{x} &= \lim_{\Delta x \to 0} \DelFrac{(x^3)}{x} \\ \\
+&= \lim_{\Delta x \to 0} \frac{(x + \Delta x)^3 - x^3}{\Delta x} \\ \\
+&= \lim_{\Delta x \to 0} \frac{x^3 + 3x^2 \, \Delta x + 3x (\Delta x)^2  + (\Delta x)^3 - x^3}{\Delta x} \\ \\
+&= \lim_{\Delta x \to 0} \frac{3x^2 \, \Delta x + 3x (\Delta x)^2 + (\Delta x)^3}{\Delta x} \\ \\
+&= \lim_{\Delta x \to 0} \left[ 3x^2 + 3x \, \Delta x + (\Delta x)^2 \right] \fs
+\intertext{Now we have reduced it to a common sense level. As \(\Delta x\) gets closer and closer to 0, the \(3x \, \Delta x\) and \((\Delta x)^2 \) terms will get closer and closer to 0 too. So, we finally have, }
+\Deriv{(x^3)}{x} &= 3x^2 \fs
+\intertext{Through the same process, which I have hidden for brevity, we can arrive at}
+\Deriv{(x^4)}{x} &= 4x^3
+\intertext{and}
+\Deriv{(x^5)}{x} &= 5x^4 \fs
+%
+\intertext{That should be enough information. Now let's lay present our findings.}
+& \def\arraystretch{1.5}
+\begin{array} {|l | l l|}
+\hline
+f(x) & & \Deriv{f}{x} \\ \hline \hline
+x^2 & & 2x^1 \\ \hline
+x^3 & & 3x^2 \\ \hline
+x^4 & & 4x^3 \\ \hline
+x^5 & & 5x^4 \\ \hline
+\end{array}
+\intertext{As we can see, the derivative of a power function seems to be the function multiplied by its power, then its own power is reduced by 1. Or, in mathematical notation, }
+\Deriv{(x^n)}{x} &\equiv nx^{n-1} \ \ \text{for any } n \fs
+\intertext{Notice how I showed this through a pattern, not by proving it. That's because proving it for any natural \(n\) is easy enough for you to do it! And as for \textbf{any} \(n\), it's definitely possible, but only by techniques in the next section. }
 \end{flalign*}
 \footnotetext{Strictly speaking, only functions that are continuous -- that is, don't have any sharp bends, vertical tangents, or gaps at any point in their range -- are differentialbe. But pretty much every function you've seen is like that.}
 \newpage
 \begin{flalign}
-	\intertext{Prove the following derivative rules. You may, without proof, quote the Binomial Theorem if required.}
-	\Deriv{\left[ f(x) + g(x) \right]}{x} & \equiv \Deriv{f}{x} + \Deriv{g}{x} \nn
-	\Deriv{\left[ k \cdot f(x) \right] }{x} & \equiv k \, \Deriv{f}{x}  \ \text{ for any constant } k \\\nonumber \\
-	\Deriv{k}{x} &\equiv 0 \ \text{ for any constant } k \nn
-	\Deriv{(kx^n)}{x} & \equiv nkx^{n-1} \ \text{for any constant } k \text{ and any natural number } n \\ \nonumber
-	%
-	\intertext{Hence find the following derivatives.}
-	\Deriv{\left(12x^3 + 3x^2\right)}{x} \nn
-	\Deriv{\left(9y^2 - 2y^5 + 3y\right)}{y} \nn
-	\Deriv{ \left(7u^3 + 3u^2 - 2u + 12\right)}{u} \nn
-	\Deriv{\left( 8\phi^{12} + 3\phi^{10} + 9\phi^2 - 17 \right)}{\phi} \nn
-	%
-	\intertext{Let} \nonumber \nolinebreak
-	\frac{\textrm{d}}{\textrm{d}x} \left( f \right) &\equiv \Deriv{f}{x}
-	\intertext{And let} \nonumber \nolinebreak
-	\NthDeriv{f}{x}{2} &\equiv \frac{\text{d}}{\text{d}x} \left( \Deriv{f}{x} \right) \ \equiv \ \Deriv{\left( \Deriv{f}{x} \right)}{x} \\ \nonumber
-	\intertext{Hence find} 
-	\NthDeriv{(x^3 + 2x^2 + 3x + 1)}{x}{2} \nn
-	\NthDeriv{(3z^4 + 2z^3 + 3z)}{z}{2}
+\intertext{Prove the following derivative rules. You may, without proof, quote the Binomial Theorem if required.}
+\Deriv{\left[ f(x) + g(x) \right]}{x} & \equiv \Deriv{f}{x} + \Deriv{g}{x} \nn
+\Deriv{\left[ k \cdot f(x) \right] }{x} & \equiv k \, \Deriv{f}{x}  \ \text{ for any constant } k \\\nonumber \\
+\Deriv{k}{x} &\equiv 0 \ \text{ for any constant } k \nn
+\Deriv{(kx^n)}{x} & \equiv nkx^{n-1} \ \text{for any constant } k \text{ and any natural number } n \\ \nonumber
+%
+\intertext{Hence find the following derivatives.}
+\Deriv{\left(12x^3 + 3x^2\right)}{x} \nn
+\Deriv{\left(9y^2 - 2y^5 + 3y\right)}{y} \nn
+\Deriv{ \left(7u^3 + 3u^2 - 2u + 12\right)}{u} \nn
+\Deriv{\left( 8\phi^{12} + 3\phi^{10} + 9\phi^2 - 17 \right)}{\phi} \nn
+%
+\intertext{Let} \nonumber \nolinebreak
+\frac{\textrm{d}}{\textrm{d}x} \left( f \right) &\equiv \Deriv{f}{x}
+\intertext{And let} \nonumber \nolinebreak
+\NthDeriv{f}{x}{2} &\equiv \frac{\text{d}}{\text{d}x} \left( \Deriv{f}{x} \right) \ \equiv \ \Deriv{\left( \Deriv{f}{x} \right)}{x} \\ \nonumber
+\intertext{Hence find} 
+\NthDeriv{(x^3 + 2x^2 + 3x + 1)}{x}{2} \nn
+\NthDeriv{(3z^4 + 2z^3 + 3z)}{z}{2}
 \end{flalign}
 % \newpage
 % \subsection{The chain rule: the mother of all rules}
 Before we can proceed any further with derivatives, we must first understand the chain rule. It forms the foundation of so many things: finding derivatives of nested functions, integration by u-substitution, implicit differentiation, solving differential equations, parametric differentiation, and the list goes on... With something so useful, you'd think it's incredibly complicated, but that couldn't be further than the truth. \\ \\
 First off, let's look at a slightly different way to define a derivative. As with our last way, we start by considering two points along the x-axis, which we shall call $x$ and $p$. Visually, we have: \\ \\
 \begin{tikzpicture}
-	\begin{axis} [
-		axis lines = left,
-		xlabel = $x$,
-		ylabel = $y$,				
-	]
-	\addplot [color = cyan, domain = 0: 20, very thick] {x^2};	
-	\pgfplotsset{ticks = none};
-	\draw [red] (axis cs: 10, 0) -- (axis cs: 10, 10^2);
-	\node [
-		label = {
-			[left, red, yshift = 2.1ex, xshift = 0.3em] 180: {$x$}
-		},
-		circle,
-		fill,
-		inner sep = 0.2pt,
-	]
-	at (axis cs: 10, 3) {};
-	\draw [red](axis cs: 15, 0) -- (axis cs: 15, 15^2);
-	\node [
-		label = {
-			[left, red, yshift = 2.1ex, xshift = 0.3em] 180: {$p$}
-		},
-		circle,
-		fill,
-		inner sep = 0.2pt,
-	]
-	at (axis cs: 15, 3) {};
-	\draw [<->, color = magenta](axis cs: 10.5, 90) -- node[above] {$\Delta x$} (axis cs: 14.5, 90);
-	\end{axis}
+\begin{axis} [
+axis lines = left,
+xlabel = $x$,
+ylabel = $y$,				
+]
+\addplot [color = cyan, domain = 0: 20, very thick] {x^2};	
+\pgfplotsset{ticks = none};
+\draw [red] (axis cs: 10, 0) -- (axis cs: 10, 10^2);
+\node [
+label = {
+	[left, red, yshift = 2.1ex, xshift = 0.3em] 180: {$x$}
+},
+circle,
+fill,
+inner sep = 0.2pt,
+]
+at (axis cs: 10, 3) {};
+\draw [red](axis cs: 15, 0) -- (axis cs: 15, 15^2);
+\node [
+label = {
+	[left, red, yshift = 2.1ex, xshift = 0.3em] 180: {$p$}
+},
+circle,
+fill,
+inner sep = 0.2pt,
+]
+at (axis cs: 15, 3) {};
+\draw [<->, color = magenta](axis cs: 10.5, 90) -- node[above] {$\Delta x$} (axis cs: 14.5, 90);
+\end{axis}
 \end{tikzpicture} \\ \\
 Traditionally, we'd let their distance, $\Delta x$, go to 0. But clearly, saying ``let's the distance between $x$ and $p$ go to 0" is the same thing as saying ``let $x$ get closer and closer to $p$". So we have two identical ways of writing a derivative: 
 \begin{flalign*}
-	 \Deriv{y}{x} &\equiv \LimDeriv{y}{x}  \nn
+	\Deriv{y}{x} &\equiv \LimDeriv{y}{x}  \nn
 	\intertext{and }   
 	\Deriv{y}{x} &\equiv \lim_{x \to p} \frac{y(x) - y(p)}{x - p} \fs  
 	\intertext{More offen than not, it's easiest to use the `` $\Delta x$ to 0 " definition. But sometimes, it's easier to use the ``$x$ to $p$" one. For instance, using that method:}
-	 \Deriv{(x^2)}{x} &= \lim_{x \to p} \frac{x^2 - p^2}{x - p}  \nn	
-	  &= \lim_{x \to p} \frac{(x - p) \, (x + p)}{x - p}  \nn
-	  &= \lim_{x \to p} \left( x + p \right)  \nn
-	  	&= 2p 
+	\Deriv{(x^2)}{x} &= \lim_{x \to p} \frac{x^2 - p^2}{x - p}  \nn	
+	&= \lim_{x \to p} \frac{(x - p) \, (x + p)}{x - p}  \nn
+	&= \lim_{x \to p} \left( x + p \right)  \nn
+	&= 2p 
 	\intertext{Or, because $p$ can be anywhere along the x-axis, we can just replace it with $x$ for convenience, like this:}
-	  	\Deriv{(x^2)}{x} &= 2x  
+	\Deriv{(x^2)}{x} &= 2x  
 	\intertext{Which is a bit nicer than having to deal with $(\Delta x)^2$, dividing by $\Delta x$, etc.}
 	\intertext{Now, an example where this definition is a lot nicer is in deriving the chain rule. \newline Consider the chain function}
-	  & z(y(x))   \nn
+	& z(y(x))   \nn
 	\text{For example }   z(y) &= y^3 \ \text{ and } \ y(x) + x^2 + 3   \nn
 	\text{Would give us }   z &= (x^2 + 3)^3  \nn
 	\intertext{Now, how would we find $\Deriv{z}{x}$? \newline Starting with our new definition of a derivative, we have:}
@@ -336,14 +281,14 @@ Traditionally, we'd let their distance, $\Delta x$, go to 0. But clearly, saying
 	\Deriv{[(x^2 + 3x + 5)^7]}{x} &= \Deriv{[(x^2 + 3x + 5)^7]}{(x^2 + 3x + 5)} \cdot \Deriv{(x^2 + 3x + 5)}{x} \nn
 	&= 7 \, (x^2 + 3x + 5)^6 \cdot (2x + 3) \nn
 	\intertext{So easy, isn't it? So much better than expanding the brackets and doing it manually. \newline
-	This is just the first of the many uses for the chain rule. We'll discover more as we go along, but for now, it'd be good to pause and do a few practice questions.}
+		This is just the first of the many uses for the chain rule. We'll discover more as we go along, but for now, it'd be good to pause and do a few practice questions.}
 \end{flalign*}
 Differentiate the following expressions (with respect to $x$):
 \begin{flalign}
 	(x^3 + 3x^2 + 4)^9 & \nn
 	(3x^4 - 11x)^{31} & \nn
 	(12x^9 + 12x^8)^3 & \nn
-	\left[x \, (x + 1 ) \, (x-1)\right]^4 &
+	\left[x \, (x + 1 ) \, (x-1)\right]^4 &    
 \end{flalign}
 \newpage
 \subsection{Euler's number}
@@ -381,7 +326,7 @@ Now that we've looked at the most important rule in calculus, it makes to look a
 Now that we've established these two cornerstones of Calculus, we can do a lot from these. To demonstrate, let's find the derivative of $\log_e x$, more commonly written as $\ln x$ . 
 \begin{flalign*}
 	\text{Let } y &= \ln x \nn
-	 e^y &= x \nn
+	e^y &= x \nn
 	\Deriv{(e^y)}{x} &= \Deriv{x}{x} \ = 1\nn
 	\intertext{How frustrating! We've got $e$ involved, and the whole thing equals 1. But we can't differentiate the left hand side as it is, because $x$ and $y$ are two completely different things. Here's where the chain rule comes in:}	
 	\Deriv{(e^y)}{y} \ \Deriv{y}{x} &= 1  \fs \nn
@@ -391,35 +336,35 @@ Now that we've established these two cornerstones of Calculus, we can do a lot f
 	\intertext{Remembering that $e^y = x$, we finally have}
 	\Deriv{y}{x} &= \frac{1}{x} \fs	
 \end{flalign*}
-Using this method of rearranging for $\Deriv{y}{x}$, we can work out a lot more identities. That, though, is for you to do.
+Using this method of rearranging for $\Deriv{y}{x}$, we can work out a lot more identities. That, though, is for you to do. \\ \\
+After this last question set, we'll take a break from derivatives. We'll return to them when looking at calculus with trigonometry for one last time, however.
 \newpage
 \begin{flalign}
 	\intertext{Using logarithm rules, prove that}
-	\Deriv{(f \cdot g)}{x} &= f\Deriv{g}{x} + g  \Deriv{f}{g} \ \text{ for any functions $f(x)$ and $g(x)$ , $f(x)$ and $g(x) \ne 0$} 
+	\Deriv{(f \cdot g)}{x} &= f\Deriv{g}{x} + g  \Deriv{f}{g} \ \text{ for any functions $f(x)$ and $g(x)$ , $f(x)$ and $g(x) \ne 0$ .} 
 	\intertext{Hence, or otherwise, prove that }
-	\Deriv{\left( \frac{f}{g} \right)}{x} &= \frac{g  \, \Deriv{f}{x} - f  \, \Deriv{g}{x}}{g^2} \ \text{ for any functions $f(x)$ and $g(x)$ , $f(x)$ and $g(x) \ne 0$} 
-	\intertext{Prove that these identities also hold when $f(x) = 0$ for both, and $g(x) = 0$ for (2.15)}
+	\Deriv{\left( \frac{f}{g} \right)}{x} &= \frac{g  \, \Deriv{f}{x} - f  \, \Deriv{g}{x}}{g^2} \ \text{ for any functions $f(x)$ and $g(x)$ , $f(x)$ and $g(x) \ne 0$ .} 
+	\intertext{These rules are known as the product and quotient rule, respectively. \newline Prove that both hold when $f(x) = 0$ for, and the product rule holds when $g(x) = 0$ too.}
 	\intertext{Hence find the derivatives of the following functions: }
 	& (3x^3 - 5x)^9 \, (2x+5)^7 \nn
 	& \frac{1 - 2x^2}{4x^3 - 2x} \nn 
-	& \left[ \frac{(3x + 1)^4 \, (12x - 3)}{4x^3} \right]^5 \nn
+	& \left[ \frac{(3x + 1)^4 \, (12x - 3)}{4x^3} \right]^5 \fs \nn
 	\intertext{Prove that}
-	x^n &= e^{n \, \ln x} \ \text{ for all real $n$, real $x \ne 0$} \fs
+	x^r &= e^{r \, \ln x} \ \text{ for all real $r$, real $x \ne 0$} \fs
 	\intertext{Hence (finally!) prove that}
-	\Deriv{(x^n)}{x} &= n \, x^{n - 1} \ \text{ for all real $n$, $x$} \fs \nn
+	\Deriv{(x^r)}{x} &= r \, x^{r - 1} \ \text{ for all real $r$, $x$} \fs \nn
 	\intertext{Prove the following miscellaneous identities:}	
 	\Deriv{(k^x)}{x} &= k^x \ln k , \ k \ne 0 \nn
-	\NthDeriv{(k^x)}{x}{n} &= k^x \ln^n k , \ k \ne 0 \nn
 	\Deriv{(\log_k x)}{x} &= \frac{1}{x \ln k} , \ x, k \ne 0 \nn
 	\Deriv{(x^x)}{x} &= x^x \, (\ln x + 1) , \ x \ne 0 \nn
-	\Deriv{(\log_x k)}{x} &= - \frac{\ln k}{x \, \ln^2 x} , \ x, k \ne 0
+	\Deriv{(\log_x k)}{x} &= - \frac{\ln k}{x \, \ln^2 x} , \ x, k \ne 0 \fs
 \end{flalign}
 \newpage
 \section{The Integral: an integral part of Calculus}
 \subsection{Going backwards: the antiderivative}
 Previously, we established how to find the rate of change of any polynomial equation. But what if we were given the rate of change, and wanted to get back to the original? For instance, imagine that the police caught someone speeding, and from their analysis, they worked out their velocity, \(v\) at any point in time along their journey as
 \begin{align*}
-	v(t) &= 12 \, t.
+v(t) &= 12 \, t.
 \end{align*} 
 Could they then work backwards to find an equation for the criminal's distance? 
 \\ \\ To do this, let's start by giving a name to the criminal's displacement. Since referring to it as \(d(t)\) could lead to confusion with \(\text{d}(t)\) -- a completely different concept -- we'll resort to the formal physics notation: \(s(t)\). So, we have
@@ -453,19 +398,27 @@ Now that we've got that example sorted, it's trivial to realise a general method
 	\intertext{In general, for any function}
 	f(x) &= kx^n
 	\intertext{its antiderivative, which we will call \(F(x)\), will be }
-	F(x) &= \frac{k}{n+1} \ x^{n + 1} + c \fs
+	F(x) &= \frac{k}{n+1} \ x^{n + 1} + c , \ n \ne 1 \fs
 	\intertext{This can be verified easily; }
 	\Deriv{F}{x} &= \frac{k}{n+1} \ (n+1) \ x^{(n+1) \, -1} \\ \\
 	&= kx^{(n+1) \, -1} \\ \\
 	&= kx^n \\ \\
 	&= f(x) \ \text{ as required.} \\
 \end{flalign*}
-This brings us to a close with the antiderivative. As with the other sections, taking a pause and solving polynomial antiderivative questions is highly reccomended before going further. Ideally you should only move on when you're at the stage where you can look at a polynomial expression and instantly say its derivative and antiderivative.
+We'll pause the idea of the antiderivative for now, and resume it shortly. Just to round this off, find the antiderivatives for the following expressions: \\
+\bgroup
+\def\arraystretch{1.5}
+\begin{flalign}
+	\begin{tabular} {|C | C | C | C|}
+		\hline
+		12x^9 & 3x^5 - 4x^2 & 9x^{12} + 3x^2 - 4 & 3 \sqrt{x} + 12 \\ \hline
+		\frac{12}{x^2} & 3 \, x \sqrt{x} & \frac{5}{x^2 \sqrt[3]{x}} & \frac{1}{x} \\ \hline
+	\end{tabular}
+\end{flalign}
 \newpage
 \subsection{Finding areas: the Riemann sum}
 In mathematics, it's often useful to find the area of a given shape. Whether two- or three-dimensional, this can be done by drawing a diagram, splitting the shape up into a group of manageable sub-shapes, and sum the areas of those. But what if we weren't given any standard shape to work with? What if we we had to find the area under a function curve?\\ \\
 Let's say we had the following curve, \(y = f(x)\): \\
-\includegraphics[width=\textwidth]{AreaUnderCurve} \\
 How could we go about finding the red area, between the points \(a\) and \(b\)?
 
 \newpage
@@ -473,7 +426,7 @@ How could we go about finding the red area, between the points \(a\) and \(b\)?
 \begin{flalign*}
 	\intertext{1.1}
 	\intertext{As \(x\) limits to \(-2\), \ \(12x^2 + 5\) \ limits to \ \(12 \, (-2)^2 + 5\). So we have}
-	 \lim_{x \to -2} (12x^2 + 5) &= 12 \, (-2)^2 + 5 \\
+	\lim_{x \to -2} (12x^2 + 5) &= 12 \, (-2)^2 + 5 \\
 	&= 53 \asreq	
 	%
 	\intertext{1.2}
@@ -518,7 +471,7 @@ How could we go about finding the red area, between the points \(a\) and \(b\)?
 	&= \frac{\sqrt{a}}{2a} \asreq
 	%
 	\intertext{2.1}
-	\Deriv{\left[ f(x) + g(x) \right]}{x} & \equiv \lim_{\Delta x \to 0} \frac{f(x + \Delta x) + g(x + \Delta x) - \left[ f(x) + g(x) \right] }\Delta{x} \\ \\
+	\Deriv{\left[ f(x) + g(x) \right]}{x} & \equiv \lim_{\Delta x \to 0} \frac{f(x + \Delta x) + g(x + \Delta x) - \left[ f(x) + g(x) \right] }{\Delta x} \\ \\
 	&\equiv \lim_{\Delta x \to 0} \frac{f(x + \Delta x) - f(x) + g(x + \Delta x) - g(x)}{\Delta x} \\ \\
 	&\equiv \lim_{\Delta x \to 0} \frac{f(x + \Delta x) - f(x)}{\Delta x} \ + \ \lim_{\Delta x \to 0} \frac{g(x + \Delta x) - g(x)}{\Delta x} \\ \\
 	&\equiv \Deriv{f}{x} + \Deriv{g}{x} \asreq
@@ -542,9 +495,9 @@ How could we go about finding the red area, between the points \(a\) and \(b\)?
 	\intertext{Now, }
 	\Deriv{(x^n)}{x} &\equiv \lim_{h \to 0} \frac{(x + h)^n - x^n}{h} \\ \\
 	\intertext{Note that \(h\) is being used instead of \(\Delta x\) purely to make the next line tidier. \newline By the Binomial Theorem, we can expand the brackets to get}
-	\Deriv{(x^n)}{x} &\equiv \lim_{h \to 0} \frac{ x^n + n \, h \, x^{n-1} + \binom{n}{2} \, x^{n-2} \, h^2 + \binom{n}{3} \, x^{n-3} \, h^3 + \binom{n}{4} \, x^{n-4} \, h^4 + \dotsc +  n \, x \, h^{n-1} + \, h^n - x^n}{h} \\ \\
-	&\equiv \lim_{h \to 0} \left[ n \, x^{x-1} + \binom{n}{2} \, x^{n-2} \, h + \binom{n}{3} \, x^{n-3} \, h^2 + \dotsc + h^{n-1} \right] \\ \\
-	&\equiv n \, x^{n-1}
+	\Deriv{(x^n)}{x} \equiv \lim_{h \to 0} &\frac{ x^n + n \, h \, x^{n-1} + \binom{n}{2} \, x^{n-2} \, h^2 + \binom{n}{3} \, x^{n-3} \, h^3 + \dotsc + h^n - x^n}{h} \\ \\
+	\equiv \lim_{h \to 0} & \left[ n \, x^{x-1} + \binom{n}{2} \, x^{n-2} \, h + \binom{n}{3} \, x^{n-3} \, h^2 + \dotsc + h^{n-1} \right] \\ \\
+	\equiv n \,  &x^{n-1}
 	\intertext{Therefore, by 2.2, }
 	\Deriv{(kx^n)}{x} &\equiv k \, n \, x^{n-1} \asreq
 	%
@@ -582,20 +535,121 @@ How could we go about finding the red area, between the points \(a\) and \(b\)?
 	&= 9y^8 \cdot (3x^2 + 6x) \nn
 	&= 27 x \, (x + 2) \, (x^3 + 3x^2 + 4)^8 \fs
 	%
-	\intertext{2.10}
+	\intertext{2.12}
 	\intertext{Similarly to 2.11, }
 	\Deriv{(3x^4 - 11x)^{31}}{x} &= \Deriv{(3x^4 - 11x)^{31}}{(3x^4 - 11x)} \cdot \Deriv{(3x^4 - 11x)}{x} \nn
 	&= 31 \, (3x^4 - 11x)^{30} \cdot (12x^3 - 11) \fs
 	%
-	\intertext{2.12}
+	\intertext{2.13}
 	\Deriv{(12x^9 + 12x^8)^3}{x} &= \Deriv{(12x^9 + 12x^8)^3}{(12x^9 + 12x^8)} \cdot \Deriv{(12x^9 + 12x^8)}{x} \nn
 	&= 3 \, (12x^9 + 12x^8)^2 \cdot (108x^8 + 96x^7) \nn
 	&= 324x^7 \, (12x^9 + 12x^8)^2 \, (12x + 1) \fs
 	%
-	\intertext{2.13}
+	\intertext{2.14}
 	\text{Observe that } x \, (x + 1 ) \, (x-1) &= x \, (x^2 - 1) \ = \ x^3 - x \nn
 	\therefore{} \Deriv{\left[x \, (x + 1 ) \, (x-1)\right]^4}{x} &= \Deriv{(x^3 - x)^4}{(x^3 - x)} \cdot \Deriv{(x^3 - x)}{x} \nn
-	&= 4 \, (x^3 - x)^3 \, (3x^2 - 1) \fs
- \end{flalign*}
+	&= 4 \, (x^3 - x)^3 \, (3x^2 - 1) \fs \nn
+	%
+	\intertext{2.15}
+	\text{Let } y &= f \, g \nn
+	\intertext{When $f$ and $g \ne 0$:}
+	\Rightarrow \ln y &= \ln f + \ln g \nn
+	\Deriv{(\ln y)}{x} &= \Deriv{(\ln f)}{x} + \Deriv{(\ln g)}{x} \nn
+	\frac{1}{y} \ \Deriv{y}{x} &= \frac{1}{f} \ \Deriv{f}{x} + \frac{1}{g} \ \Deriv{g}{x} \nn
+	\Deriv{y}{x} &= \frac{f \, g}{f} \ \Deriv{f}{x} + \frac{f \, g}{g} \Deriv{g}{x} \nn
+	&= g \ \Deriv{f}{x} + f \Deriv{g}{x} 
+	\intertext{And when $f$ and/or $g = 0$:}  
+	y \text{ and } \Deriv{y}{x} = 0 \nn
+	\text{And either } f \text{ and } \Deriv{f}{x} &= 0 , \ \text{ or } g \text{ and } \Deriv{g}{x} = 0 \ \text{ or both. } \nn
+	\Rightarrow g \ \Deriv{f}{x} + f \Deriv{g}{x} &= 0 \nn
+	&= \Deriv{y}{x}    
+	\intertext{So either way, the rule holds. $\qed$}
+	%
+	\intertext{2.16}
+	\intertext{This can either be proved similarly to our method in deriving the product rule, or using the product rule itself. I will do the latter.}
+	\text{Let } y &= f \, \frac{1}{g}
+	\intertext{By (2.15), we have}
+	\Deriv{y}{x} &= \frac{1}{g} \ \Deriv{f}{x} + f \ \Deriv{\left( \frac{1}{g} \right)}{x} \nn
+	\intertext{Notice how our proof for the product rule has already covered the scenario when $f(x) = 0$ for us.}
+	\Deriv{y}{x} &= \frac{1}{g} \Deriv{f}{x} - \frac{f}{g^2} \Deriv{g}{x} \nn
+	&= \frac{g \ \Deriv{f}{x} }{g^2} - \frac{f \ \Deriv{g}{x}}{g^2} \nn
+	&= \frac{g \ \Deriv{f}{x} - f \ \Deriv{g}{x}}{g^2} \asreq 
+	%
+	\intertext{2.17}
+	\intertext{By the product rule, }
+	\Deriv{\left[ (3x^3 - 5x)^9 \, (2x+5)^7 \right]}{x} = (3x^3 - 5x)^9 \ & \Deriv{(2x+5)^7}{x} + (2x+5)^7 \ \Deriv{(3x^3 - 5x)^9}{x} \nn 
+	= (3x+5)^9 \times 7 & \, (2x + 5)^6 \times 2 + (2x+5)^7 \times 9 \, (3x^3 - 5x)^8 \times (9x^2 - 5) \nn
+	&= 14 \, (3x+5)^9 \, (2x+5)^6 + 9 \, (3x^3 - 5x)^8 \, (9x^2 - 5) \nn
+	%
+	\intertext{By the quotient rule, we have}
+	\OutsideDeriv{ \frac{1 - 2x^2}{4x^3 - 2x} }{x} &= \frac{ (4x^3 - 2x) \cdot \OutsideDeriv{1 - 2x^2}{x} - (1 - 2x^2) \cdot \OutsideDeriv{4x^3 - 2x}{x} }{(4x^3 - 2x)^2}  \nn
+	&= \frac{ (4x^3 - 2x) \, (4x) - (1 - 2x^2) \, (12x^2 - 2)}{(4x^3 - 2x)^2} \nn
+	&= \frac{ 8x^2 (2x^2 - 1) - 2 \, (1 - 2x^2) \, (6x^2 - 1)}{(4x^3 - 2x)^2} \fs \nn
+	%
+	\intertext{Using the product, quotient and chain rule, we have}
+	\OutsideDeriv{\left[ \frac{(3x + 1)^4 \, (12x - 3)}{4x^3} \right]^5}{x} = 5 \, \left[ \frac{(3x + 1)^4 \, (12x - 3)}{4x^3} \right]^4 & \ \OutsideDeriv{\frac{(3x + 1)^4 \, (12x - 3)}{4x^3}}{x} \nn
+	= 5 \, \left[ \frac{(3x + 1)^4 \, (12x - 3)}{4x^3} \right]^4 & \frac{ 4x^3 \OutsideDeriv{(3x+1)^4 \, (12x-3)}{x} - (3x+1)^4 \, (12x-3) \ \OutsideDeriv{4x^3}{x}}{(4x^3)^2} \nn
+	= 5 \, \left[ \frac{(3x + 1)^4 \, (12x - 3)}{4x^3} \right]^4 & \frac{4x \, [(3x+1)^4 + (12x-3)] - 3 \, (3x+1)^4 (12x-3)}{4x} \fs
+	%
+	\intertext{2.20}
+	\intertext{When $x \ne 0$:}
+	x &= e^{\ln x} \nn
+	\Rightarrow x^r &= \left( e^{\ln x} \right)^r \nn
+	&= e^{r \, \ln x} \asreq
+	%
+	\intertext{2.21}
+	\intertext{By (2.20), when $x \ne 0$:}
+	\Deriv{(x^r)}{x} &= \Deriv{(e^{r \ln x})}{x} \nn
+	&= \Deriv{(e^{r \ln x})}{(r \ln x)} \ \Deriv{(r \ln x)}{x} \nn
+	&= \frac{r \, e^{r \ln x}}{x} \nn
+	&= \frac{r \, x^r}{x} \nn
+	&= r \, x^{r - 1} 
+	\intertext{And when $x = 0$:}
+	\Deriv{(x^r)}{x} &= 0 \nn
+	&= r \, x^{r - 1} 
+	\intertext{So either way, the statement holds. $\qed$}
+	%
+	\intertext{2.22}
+	\text{Let } y &= k^x \nn
+	\intertext{When $k \ne 0$ :}
+	\ln y &= x \ln k \nn
+	\Deriv{(\ln y)}{x} &= \Deriv{(x \ln k)}{x} \nn
+	\frac{1}{y} \ \Deriv{y}{x} &= \ln k \nn
+	\Deriv{y}{x} &= y \ln k \nn
+	&= k^x \ln k \asreq
+	%
+	\intertext{2.23}
+	\text{Let } y &= \log_k x , \ x \ne 0 \nn
+	k^y &= x \nn
+	\Deriv{(k^y)}{x} &= \Deriv{x}{x}
+	\intertext{By (2.22), we then have that when $k \ne 0$}
+	k^y \ln k \ \Deriv{y}{x} &= 1 \nn
+	\Deriv{y}{x} &= \frac{1}{k^y \ln k} \nn
+	&= \frac{1}{x \ln k} \asreq
+	%
+	\intertext{2.24}
+	\text{Let } y &= x^x \nn
+	\ln y &= x \ln x , \ x \ne 0 \nn
+	\Deriv{(\ln y)}{x} &= \Deriv{(x \ln x)}{x} \nn
+	\frac{1}{y} \ \Deriv{y}{x} &= \frac{x}{x} + \ln x \nn
+	\Deriv{y}{x} &= y \, (1 + \ln x) \nn
+	&= x^x \, (1 + \ln x) \asreq
+	%
+	\intertext{2.25}
+	\text{Let }y &= \log_x k \nn
+	x^y &= k \nn
+	y \ln x &= \ln k , \ x, k \ne 0 \nn
+	y &= \ln k \, \frac{1}{\ln x} \nn
+	\Deriv{y}{x} &= \ln k \ \Deriv{\left( \frac{1}{\ln x} )\right)}{(\ln x)} \ \Deriv{( \ln x)}{x} \nn
+	&= - \frac{\ln k}{\ln^2 x} \ \frac{1}{x} \nn
+	&= -\frac{\ln k}{x \, \ln^2 x} \asreq 
+	%
+	\intertext{3.1}
+	\begin{tabular} {|C | C | C | C|}
+		\hline
+		\frac{12x^{10}}{10} + c & 2x^6 - \frac{4x^3}{3} + c & \frac{9x^{13}}{13} + x^3 - 4x + c & 2 \, x \, \sqrt{x} + 12x + c
+		 \\ \hline
+		12 \sqrt{x} & 3 \, x \sqrt{x} & \frac{5}{x^2 \sqrt{x}} & 15 \, x^2 \sqrt[5]{x} - 3 \\ \hline
+	\end{tabular}
+\end{flalign*} 
 \end{document}
-
