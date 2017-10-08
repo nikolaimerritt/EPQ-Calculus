@@ -1,8 +1,10 @@
 \documentclass[11pt, leqno]{article}
 \usepackage[margin=0.5in]{geometry}
 \usepackage[x11names]{xcolor}
-\usepackage{amsfonts,amsmath,amssymb,amsthm, amstext, array}
+\usepackage{amsmath}
+\usepackage{amsfonts,amssymb,amsthm, amstext, array}
 \usepackage{float}
+\usepackage{scalerel}
 \usepackage{etoolbox}
 \usepackage{ragged2e}
 \usepackage{graphicx}
@@ -15,7 +17,9 @@
 \date{\vspace{-5ex}}
 \numberwithin{equation}{section}
 \graphicspath{{Images/}}
-
+\usepgfplotslibrary{fillbetween}
+\parskip 1ex
+\DeclareMathOperator*{\rint}{\ThisStyle{\rotatebox{12}{$\SavedStyle\!\int\!$}}}
 \begin{document}
 	
 \newcommand{\Diff}[1] {\mathop{\text{d}#1}}
@@ -210,35 +214,35 @@ x^5 & & 5x^4 \\ \hline
 Before we can proceed any further with derivatives, we must first understand the chain rule. It forms the foundation of so many things: finding derivatives of nested functions, integration by u-substitution, implicit differentiation, solving differential equations, parametric differentiation, and the list goes on... With something so useful, you'd think it's incredibly complicated, but that couldn't be further than the truth. \\ \\
 First off, let's look at a slightly different way to define a derivative. As with our last way, we start by considering two points along the x-axis, which we shall call $x$ and $p$. Visually, we have: \\ \\
 \begin{tikzpicture}
-\begin{axis} [
-axis lines = left,
-xlabel = $x$,
-ylabel = $y$,				
-]
-\addplot [color = cyan, domain = 0: 20, very thick] {x^2};	
-\pgfplotsset{ticks = none};
-\draw [red] (axis cs: 10, 0) -- (axis cs: 10, 10^2);
-\node [
-label = {
-	[left, red, yshift = 2.1ex, xshift = 0.3em] 180: {$x$}
-},
-circle,
-fill,
-inner sep = 0.2pt,
-]
-at (axis cs: 10, 3) {};
-\draw [red](axis cs: 15, 0) -- (axis cs: 15, 15^2);
-\node [
-label = {
-	[left, red, yshift = 2.1ex, xshift = 0.3em] 180: {$p$}
-},
-circle,
-fill,
-inner sep = 0.2pt,
-]
-at (axis cs: 15, 3) {};
-\draw [<->, color = magenta](axis cs: 10.5, 90) -- node[above] {$\Delta x$} (axis cs: 14.5, 90);
-\end{axis}
+	\begin{axis} [
+	axis lines = left,
+		xlabel = $x$,
+		ylabel = $y$,				
+	]
+	\addplot [color = cyan, domain = 0: 20, very thick] {x^2};	
+	\pgfplotsset{ticks = none};
+	\draw [red] (axis cs: 10, 0) -- (axis cs: 10, 10^2);
+	\node [
+		label = {
+			[left, red, yshift = 2.1ex, xshift = 0.3em] 180: {$x$}
+		},
+		circle,
+		fill,
+		inner sep = 0.2pt,
+	]
+	at (axis cs: 10, 3) {};
+	\draw [red](axis cs: 15, 0) -- (axis cs: 15, 15^2);
+	\node [
+		label = {
+			[left, red, yshift = 2.1ex, xshift = 0.3em] 180: {$p$}
+		},
+		circle,
+		fill,
+		inner sep = 0.2pt,
+	]
+	at (axis cs: 15, 3) {};
+	\draw [<->, color = magenta](axis cs: 10.5, 90) -- node[above] {$\Delta x$} (axis cs: 14.5, 90);
+	\end{axis}
 \end{tikzpicture} \\ \\
 Traditionally, we'd let their distance, $\Delta x$, go to 0. But clearly, saying ``let's the distance between $x$ and $p$ go to 0" is the same thing as saying ``let $x$ get closer and closer to $p$". So we have two identical ways of writing a derivative: 
 \begin{flalign*}
@@ -419,8 +423,101 @@ We'll pause the idea of the antiderivative for now, and resume it shortly. Just 
 \subsection{Finding areas: the Riemann sum}
 In mathematics, it's often useful to find the area of a given shape. Whether two- or three-dimensional, this can be done by drawing a diagram, splitting the shape up into a group of manageable sub-shapes, and sum the areas of those. But what if we weren't given any standard shape to work with? What if we we had to find the area under a function curve?\\ \\
 Let's say we had the following curve, \(y = f(x)\): \\
-How could we go about finding the red area, between the points \(a\) and \(b\)?
-
+How could we go about finding the red area, between the points \(a\) and \(b\)? \\ \\
+\begin{center} \begin{tikzpicture}
+	\begin{axis}[
+		axis lines = center,
+		grid = minor,
+		ymin = 0,
+		ymax = 2.5,
+		xmin = 0,
+		no marks,
+	]
+	\addplot+ [thick, smooth, cyan, name path = f] {1/20 * x^2 + 1}; % actual curve
+	\addplot+ [draw = none, name path = B] {0};     % “fictional” curve
+	\addplot+ [red, fill opacity = 0.1] fill between[of = f and B, soft clip = {domain = 0.5: 3.8}]; % filling	
+	
+	\draw [red] (axis cs: 0.5, 0) -- (axis cs: 0.5, 1/20 * 0.5 * 0.5 + 1);
+	\node [
+		label = {
+			[left, red, yshift = 2.1ex, xshift = 0.3em] 180: {$a$}
+		},
+		circle,
+		fill,
+		inner sep = 0.2pt,
+	]
+	at (axis cs: 0.5, 0.2) {};
+	
+	\draw [red] (axis cs: 3.8, 0) -- (axis cs: 3.8, 1/20 * 3.8 * 3.8 + 1);
+	\node [
+	label = {
+		[left, red, yshift = 2.1ex, xshift = 0.3em] 180: {$b$}
+	},
+	circle,
+	fill,
+	inner sep = 0.2pt,
+	]
+	at (axis cs: 3.8, 0.2) {};
+	
+	\pgfplotsset{ticks = none};
+	\end{axis}
+\end{tikzpicture} \end{center}
+As with derivatives, let's start off by working out an approximation. Let's split the curve into $n$ amount of strips, each a distance $\Delta x$ apart. So each of our strips is at:
+\begin{flalign*}
+	& a, \ a + \Delta x,\  a + 2 \, \Delta x,\  a + 3 \, \Delta x, \ \cdots, \ a + (n-1) \, \Delta x, \ b \fs
+\end{flalign*}
+To make things easier, let's label the strips $x_1$, $x_2$, $x_3$, etc. Visually, letting $n = 10$ would give us:
+\begin{center}\begin{tikzpicture}
+	\pgfmathsetmacro{\N}{9}
+	\def\a {0.5}
+	\def\b {3.8}
+	\begin{axis}[
+		axis lines = center,
+		grid = minor,
+		ymin = 0,
+		ymax = 2.5,
+		xmin = 0,
+		no marks,
+	]
+	\addplot+ [thick, smooth, cyan, name path = f] {1/20 * x^2 + 1}; % actual curve
+	\addplot+ [draw = none, name path = B] {0};     % “fictional” curve
+	\addplot+ [red, fill opacity = 0.1] fill between[of = f and B, soft clip = {domain = \a: \b}]; % filling	
+	\pgfplotsset{ticks = none};
+		
+	\foreach \i in {0, 1, ..., \N} {
+		\pgfmathsetmacro{\iLabel}{int(\i + 1)}
+		\pgfmathsetmacro{\x}{\a +\i*\b/\N-\i*\a/\N}
+		\pgfmathsetmacro{\y}{\x*\x/20 + 1}
+		\edef\temp
+		{			
+			\noexpand \draw [red] (axis cs: \x,  0) -- (axis cs: \x,  \y);	
+			\noexpand \node [
+			label = {
+				[left, red, yshift = 2.1ex, xshift = 0.3em] 180: {$x_{\iLabel}$}
+			},
+			circle,
+			fill,
+			inner sep = 0.2pt,
+			]
+			at (axis cs: \x, 0.05) {};
+		}
+		\temp
+	}		
+	
+	\end{axis}
+\end{tikzpicture}\end{center} 
+Now to find the area of each strip. We can find an easy-to-work-out estimate for this by treating each strip as a rectangle. Now the area is just the height, $f(x)$, multiplied by the base length, $\Delta x$. So, for any strip at $x_i$,
+\begin{flalign*}
+	\text{Area} & \approx f(x_i) \, \Delta x
+	\intertext{And, because the total area is just the sum of the strips' areas, }
+	\text{Total Area} & \approx \sum_{i = 1}^{n} f(x_i) \,\Delta x		
+	\intertext{How can we make our area more accurate? Simple: have more strips! The more strips we add, the closer together they get, and the less area is being missed out by our estimates. So, just like our derivative, our estimate gets more accurate the more strips we get, and the closer the width gets to 0. In other words,}
+	\text{Total Area} &= \lim_{\Delta x \to 0} \ \sum_{i = 1}^{n} f(x_i) \Delta x \fs
+	\intertext{Because this definition is very useful (as we'll see later), we have a standard shorthand for writing it. We use a stretched S to represent our infinite sum, and $\Diff{x}$ instead of $\Delta x$, like so:} 
+	\text{Total Area} &= \rint f(x) \Diff{x} \, ,
+	\intertext{and, between two $x$-coordinates $a$ and $b$,}	
+	\text{Total Area between $a$ and $b$} &= \rint_{a}^{b} f(x) \Diff{x} \fs
+\end{flalign*}
 \newpage
 \section{Solutions}
 \begin{flalign*}
@@ -475,7 +572,8 @@ How could we go about finding the red area, between the points \(a\) and \(b\)?
 	&\equiv \lim_{\Delta x \to 0} \frac{f(x + \Delta x) - f(x) + g(x + \Delta x) - g(x)}{\Delta x} \\ \\
 	&\equiv \lim_{\Delta x \to 0} \frac{f(x + \Delta x) - f(x)}{\Delta x} \ + \ \lim_{\Delta x \to 0} \frac{g(x + \Delta x) - g(x)}{\Delta x} \\ \\
 	&\equiv \Deriv{f}{x} + \Deriv{g}{x} \asreq
-	%
+\end{flalign*}
+\begin{flalign*}
 	\intertext{2.2}
 	\Deriv{\left[ k \cdot f(x) \right]}{x} &\equiv \LimDeriv{k \cdot f}{x} \\ \\
 	&\equiv \lim_{\Delta x \to 0} k \cdot \LimDeriv{f}{x} \\ \\
@@ -495,9 +593,9 @@ How could we go about finding the red area, between the points \(a\) and \(b\)?
 	\intertext{Now, }
 	\Deriv{(x^n)}{x} &\equiv \lim_{h \to 0} \frac{(x + h)^n - x^n}{h} \\ \\
 	\intertext{Note that \(h\) is being used instead of \(\Delta x\) purely to make the next line tidier. \newline By the Binomial Theorem, we can expand the brackets to get}
-	\Deriv{(x^n)}{x} \equiv \lim_{h \to 0} &\frac{ x^n + n \, h \, x^{n-1} + \binom{n}{2} \, x^{n-2} \, h^2 + \binom{n}{3} \, x^{n-3} \, h^3 + \dotsc + h^n - x^n}{h} \\ \\
+	\Deriv{(x^n)}{x} & \nn \equiv \lim_{h \to 0} & \frac{ x^n + n \, h \, x^{n-1} + \binom{n}{2} \, x^{n-2} \, h^2 + \dotsc + h^n - x^n}{h} \\ \\
 	\equiv \lim_{h \to 0} & \left[ n \, x^{x-1} + \binom{n}{2} \, x^{n-2} \, h + \binom{n}{3} \, x^{n-3} \, h^2 + \dotsc + h^{n-1} \right] \\ \\
-	\equiv n \,  &x^{n-1}
+	\equiv n \,  & x^{n-1} 
 	\intertext{Therefore, by 2.2, }
 	\Deriv{(kx^n)}{x} &\equiv k \, n \, x^{n-1} \asreq
 	%
@@ -579,17 +677,29 @@ How could we go about finding the red area, between the points \(a\) and \(b\)?
 	\intertext{By the product rule, }
 	\Deriv{\left[ (3x^3 - 5x)^9 \, (2x+5)^7 \right]}{x} = (3x^3 - 5x)^9 \ & \Deriv{(2x+5)^7}{x} + (2x+5)^7 \ \Deriv{(3x^3 - 5x)^9}{x} \nn 
 	= (3x+5)^9 \times 7 & \, (2x + 5)^6 \times 2 + (2x+5)^7 \times 9 \, (3x^3 - 5x)^8 \times (9x^2 - 5) \nn
-	&= 14 \, (3x+5)^9 \, (2x+5)^6 + 9 \, (3x^3 - 5x)^8 \, (9x^2 - 5) \nn
+	= 14 \, (3x+5)^9 \, & (2x+5)^6 + 9 \, (3x^3 - 5x)^8 \, (9x^2 - 5) \nn
 	%
+	\intertext{2.18}
 	\intertext{By the quotient rule, we have}
-	\OutsideDeriv{ \frac{1 - 2x^2}{4x^3 - 2x} }{x} &= \frac{ (4x^3 - 2x) \cdot \OutsideDeriv{1 - 2x^2}{x} - (1 - 2x^2) \cdot \OutsideDeriv{4x^3 - 2x}{x} }{(4x^3 - 2x)^2}  \nn
+	& \OutsideDeriv{ \frac{1 - 2x^2}{4x^3 - 2x} }{x}  \nn = & \frac{ (4x^3 - 2x) \cdot \OutsideDeriv{1 - 2x^2}{x} - (1 - 2x^2) \cdot \OutsideDeriv{4x^3 - 2x}{x} }{(4x^3 - 2x)^2}  \nn
 	&= \frac{ (4x^3 - 2x) \, (4x) - (1 - 2x^2) \, (12x^2 - 2)}{(4x^3 - 2x)^2} \nn
-	&= \frac{ 8x^2 (2x^2 - 1) - 2 \, (1 - 2x^2) \, (6x^2 - 1)}{(4x^3 - 2x)^2} \fs \nn
+	&= \frac{ 8x^2 (2x^2 - 1) - 2 \, (1 - 2x^2) \, (6x^2 - 1)}{(4x^3 - 2x)^2} \fs \nn	
 	%
+	\intertext{2.19}
 	\intertext{Using the product, quotient and chain rule, we have}
-	\OutsideDeriv{\left[ \frac{(3x + 1)^4 \, (12x - 3)}{4x^3} \right]^5}{x} = 5 \, \left[ \frac{(3x + 1)^4 \, (12x - 3)}{4x^3} \right]^4 & \ \OutsideDeriv{\frac{(3x + 1)^4 \, (12x - 3)}{4x^3}}{x} \nn
-	= 5 \, \left[ \frac{(3x + 1)^4 \, (12x - 3)}{4x^3} \right]^4 & \frac{ 4x^3 \OutsideDeriv{(3x+1)^4 \, (12x-3)}{x} - (3x+1)^4 \, (12x-3) \ \OutsideDeriv{4x^3}{x}}{(4x^3)^2} \nn
-	= 5 \, \left[ \frac{(3x + 1)^4 \, (12x - 3)}{4x^3} \right]^4 & \frac{4x \, [(3x+1)^4 + (12x-3)] - 3 \, (3x+1)^4 (12x-3)}{4x} \fs
+\end{flalign*}
+%
+\begin{equation}
+\begin{split}	
+	\OutsideDeriv{\left[ \frac{(3x + 1)^4 \, (12x - 3)}{4x^3} \right]^5}{x} &= 5 \, \left[ \frac{(3x + 1)^4 \, (12x - 3)}{4x^3} \right]^4  \ \OutsideDeriv{\frac{(3x + 1)^4 \, (12x - 3)}{4x^3}}{x} \nn
+	&= 5 \, \left[ \frac{(3x + 1)^4 \, (12x - 3)}{4x^3} \right]^4 \times \nn 
+	&\frac{ 4x^3 \OutsideDeriv{(3x+1)^4 \, (12x-3)}{x} - (3x+1)^4 \, (12x-3) \ \OutsideDeriv{4x^3}{x}}{(4x^3)^2} \nn
+	&= 5 \, \left[ \frac{(3x + 1)^4 \, (12x - 3)}{4x^3} \right]^4 \times \nn 
+	&\frac{4x \, [(3x+1)^4 + (12x-3)] - 3 \, (3x+1)^4 (12x-3)}{4x} \fs
+\end{split}
+\end{equation}
+%
+\begin{flalign*}
 	%
 	\intertext{2.20}
 	\intertext{When $x \ne 0$:}
@@ -645,11 +755,17 @@ How could we go about finding the red area, between the points \(a\) and \(b\)?
 	&= -\frac{\ln k}{x \, \ln^2 x} \asreq 
 	%
 	\intertext{3.1}
+\end{flalign*}
+\begin{center}
 	\begin{tabular} {|C | C | C | C|}
 		\hline
-		\frac{12x^{10}}{10} + c & 2x^6 - \frac{4x^3}{3} + c & \frac{9x^{13}}{13} + x^3 - 4x + c & 2 \, x \, \sqrt{x} + 12x + c
-		 \\ \hline
-		12 \sqrt{x} & 3 \, x \sqrt{x} & \frac{5}{x^2 \sqrt{x}} & 15 \, x^2 \sqrt[5]{x} - 3 \\ \hline
+		\frac{6x^{10}}{5} + c & \frac{x^6}{2} - \frac{4x^3}{3} + c & \frac{9x^{13}}{13} + x^3 - 4x + c & 2 \, x \, \sqrt{x} + 12x + c
+		\\ \hline
+		- \frac{12}{x} + c  & \frac{6}{5} \, x^2 \sqrt{x} + c & - \frac{15}{4x \sqrt[3]{x}} + c & \ln x \\ \hline
 	\end{tabular}
+\end{center}
+%
+\begin{flalign*}
+hi	
 \end{flalign*} 
 \end{document}
